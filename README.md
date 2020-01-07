@@ -54,6 +54,8 @@ So I've found [this](https://stackoverflow.com/questions/34842163/how-to-read-fr
 
 ## Getting the Product Information
 
+Regardless of the language that I choose to implement this, I should form some sort of cache for the UPCs that I have read such that when I scan an item, it searches the cached UPCs first before making the HTTP request. This way it will not cost me points when I scan items that I have scanned in the past.
+
 ### Python
 
 I believe this is wholly-completed with the BarcodeSpider.com API that I've signed up for and the standard Python library which is AWESOME! BUT. I don't know if I want to do the whole thing in Python yet. If we go the application route, I think I'd have to develop in Java.
