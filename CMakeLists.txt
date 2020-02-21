@@ -23,6 +23,7 @@ add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 # Include headers.
 #target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 include_directories(include)
+include_directories(external/include)
 
 add_executable(${LIBRARY_NAME}_main ${SOURCES})
 
