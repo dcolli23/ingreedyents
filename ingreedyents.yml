@@ -1,0 +1,5 @@
+name: ingreedyents
+channels:
+  - defaults
+prefix: /home/dylan/anaconda3/envs/ingreedyents
+
