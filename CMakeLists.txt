@@ -5,8 +5,9 @@ project(INGREEDYENTS VERSION 0.0.1 LANGUAGES CXX)
 #---------------------------------------------------------------------------------------------------
 # Find files for this repository - this needs to be updated for every new src file.
 #---------------------------------------------------------------------------------------------------
-set(SOURCES 
-#    src/example.cpp
+set(SOURCES
+    app/main.cpp
+    src/example.cpp
 )
 set(TESTFILES
 #    tests/main.cpp
@@ -20,9 +21,13 @@ set(LIBRARY_NAME ingreedyents) # Default name for library built from src
 add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 
 # Include headers.
-target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
+#target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
+include_directories(include)
 
-add_executable(${LIBRARY_NAME}_main app/main.cpp)
+add_executable(${LIBRARY_NAME}_main ${SOURCES})
+
+#target_include_directories(${LIBRARY_NAME}_main PRIVATE ${PROJECT_SOURCE_DIR}/include)
+
 
 # Link the executable to the library.
 # NOTE: we don't have to do this yet since we don't make any libraries at the moment.
