@@ -31,14 +31,12 @@ So I know I can do all of the above in Python except for #1. I'm not sure how to
 
 # Language
 
-So this is DEFINITELY doable in Python. But what if I did it in C++ to be a true glutton for punishment?
+I've chosen to do this in C++. It's a fun project and will be a good challenge for me. I can also try and implement a barcode scanner using OpenCV with C++, so that will be really fun.
 
 # Plan of Action
 This is where I'm going to jot down my notes on my plan of attack for all of this.
 
 ## Reading the UPC
-
-### Python
 
 I'm looking at UPC readers and I found one on amazon that seems to support everything that I want to do. 
 
@@ -48,34 +46,22 @@ I also have my old Galaxy Note 2 that I could take a whack at developing somethi
 
 I think the best option would be to buy a barcode reader that transmits data into a USB.
 
-### C++
-
 So I've found [this](https://stackoverflow.com/questions/34842163/how-to-read-from-serial-device-in-c) link which talks about reading in serial data using C++. So I think it's doable.
 
 ## Getting the Product Information
 
-Regardless of the language that I choose to implement this, I should form some sort of cache for the UPCs that I have read such that when I scan an item, it searches the cached UPCs first before making the HTTP request. This way it will not cost me points when I scan items that I have scanned in the past.
+I should form some sort of cache for the UPCs that I have read such that when I scan an item, it searches the cached UPCs first before making the HTTP request. This way it will not cost me points when I scan items that I have scanned in the past.
 
 ### Python
 
-I believe this is wholly-completed with the BarcodeSpider.com API that I've signed up for and the standard Python library which is AWESOME! BUT. I don't know if I want to do the whole thing in Python yet. If we go the application route, I think I'd have to develop in Java.
+I believe this is wholly-completed with the BarcodeSpider.com API that I've signed up for. This will be accomplished with a GET request which can be done via the `HTTPRequest` library I've downloaded.
 
-### C++
-
-I've found [this](https://stackoverflow.com/questions/1011339/how-do-you-make-a-http-request-with-c) link which discusses HTTP GET requests with C++. It seems like there are a lot of sloppy/undocumented stuff out there but that POCO might not be bad?
-
-Wonder if I'll need rapidJSON for parsing JSONs I get from the APIs.
+I'm going to use RapidJSON to parse the JSON-formatted strings that I get from the GET requests.
 
 ## Obtaining the Optimized Recipe Choices
 
-### Python
-
 This will likely be completed by making a request to a recipe API. Spoonacular seems to be pretty good for this. You get 150 points for free per month. Calling the endpoint costs 1 point and each recipe returned costs 0.01 points. So finding 1000 recipes would cost 11 points. HOLY MOLY they do macros and nutritional information too! This is amazing. And actually Spoonacular has the capability of reading by UPC as well. Well this is quickly becoming something I may pay for.
-
-### C++
-
-Basically the same as above I think? If I can get the HTTP GETs requests working in C++ this is easy peasy lemon squeazy. 
 
 ## User Interface to Select Recipe
 
-This is where the language choice might be a huge pain in the butt. If I choose to go with a GUI for browsing the recipes and use C++ this will likely be a huge time sinkhole as I don't think there's a good free, open-source, easy-to-develop library for GUI development on Linux (which the Pi will be running).
+I've done some research on developing using the Qt framework and it seems to be easy enough. I'm likely going to choose this.

@@ -61,9 +61,6 @@ add_executable(${LIBRARY_NAME}_main ${SOURCES})
 #target_link_libraries(main PRIVATE ${LIBRARY_NAME}) # Link executable to the library.
 
 # Link the googletest library with the executable
-#target_link_libraries(${LIBRARY_NAME}_main gtest_main)
-#add_test(NAME Example_Test COMMAND ${LIBRARY_NAME}_main)
-
 add_executable(my_tests ${TESTFILES} src/example.cpp)
 target_link_libraries(my_tests gtest_main)
 
