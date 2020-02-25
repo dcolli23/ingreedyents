@@ -10,6 +10,9 @@
   + [Getting the Product Information](#getting-the-product-information)
   + [Obtaining the Optimized Recipe Choices](#obtaining-the-optimized-recipe-choices)
   + [User Interface to Select Recipe](#user-interface-to-select-recipe)
++ [Testing](#testing)
+  + [Running Tests](#running-tests)
+  + [Writing Tests](#writing-tests)
 
 # Overview
 
@@ -52,11 +55,11 @@ So I've found [this](https://stackoverflow.com/questions/34842163/how-to-read-fr
 
 I should form some sort of cache for the UPCs that I have read such that when I scan an item, it searches the cached UPCs first before making the HTTP request. This way it will not cost me points when I scan items that I have scanned in the past.
 
-### Python
-
-I believe this is wholly-completed with the BarcodeSpider.com API that I've signed up for. This will be accomplished with a GET request which can be done via the `HTTPRequest` library I've downloaded.
+I believe this is wholly-completed with the spoonacular API that I've signed up for. This will be accomplished with a GET request which can be done via the `HTTPRequest` library I've downloaded.
+  + Spoonacular has a good example of what this will look like here: https://spoonacular.com/food-api/docs#Search-Grocery-Products-by-UPC
 
 I'm going to use RapidJSON to parse the JSON-formatted strings that I get from the GET requests.
+  + I'm planning on making a class for this to distill down all of the information I'm going to get in the returned JSON file. 
 
 ## Obtaining the Optimized Recipe Choices
 
@@ -65,3 +68,44 @@ This will likely be completed by making a request to a recipe API. Spoonacular s
 ## User Interface to Select Recipe
 
 I've done some research on developing using the Qt framework and it seems to be easy enough. I'm likely going to choose this.
+
+# Testing
+
+## Running Tests
+
+To build and run all tests, simply execute `./run_tests.sh` in the repository's root directory.
+
+## Writing Tests
+
+This project uses the `googletest` framework for testing functionality. This is the process for writing a new test suite.
+
+Note: Test suite is used to refere to a new group of tests indepenedent from other tests. In this repository, we're making a new executable for each test suite and writing a new test suite for each class.
+
+1. Make a new `.cpp` file in the `/tests/` directory of the repository. Name it the name of the test suite.
+2. In the new `<test_suite>.cpp` file, write the following as boilerplate:
+    ```c++
+    #include "gtest/gtest.h"
+    #include "<name_of_class_under_test>"
+
+    // insert any test fixtures here.
+
+    TEST(<test_suite_name>, <test_name>) {
+      // insert code for test here using:
+      //    ASSERT_*(x, y) when you want the test to halt on failure.
+      //    EXPECT_*(x, y) when you want the test to continue upon failure.
+    }
+
+    int main (int argc, char* argv[]) {
+      ::testing::InitGoogleTest(&argc, argv);
+      return RUN_ALL_TESTS();
+    }
+    ```
+3. Write the first test that you would like.
+4. In `/CMakeLists.txt`, add the following for your new test suite:
+    ```cmake
+    add_executable(<test_suite_name> tests/<test_suite_name>.cpp src/<class_under_test>.cpp)
+    target_link_libraries(<test_suite_name> gtest_main)
+    ```
+5. Append `./<test_suite_name>` to `/run_tests.sh`
+
+

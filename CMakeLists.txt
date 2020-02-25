@@ -34,9 +34,11 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 set(SOURCES
     app/main.cpp
     src/example.cpp
+    src/ingredient_result.cpp
 )
 set(TESTFILES
     tests/Example_Test.cpp
+    tests/JSONParserTest.cpp
 )
 set(LIBRARY_NAME ingreedyents) # Default name for library built from src
 
@@ -61,8 +63,8 @@ add_executable(${LIBRARY_NAME}_main ${SOURCES})
 #target_link_libraries(main PRIVATE ${LIBRARY_NAME}) # Link executable to the library.
 
 # Link the googletest library with the executable
-add_executable(my_tests ${TESTFILES} src/example.cpp)
-target_link_libraries(my_tests gtest_main)
+add_executable(ingredient_result_test tests/JSONParserTest.cpp src/ingredient_result.cpp)
+target_link_libraries(ingredient_result_test gtest_main)
 
 set_target_properties(
   ${LIBRARY_NAME} ${LIBRARY_NAME}_main
