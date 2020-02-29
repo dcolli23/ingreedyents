@@ -5,29 +5,30 @@ project(INGREEDYENTS VERSION 0.0.1 LANGUAGES CXX)
 #---------------------------------------------------------------------------------------------------
 # Googletest setup
 #---------------------------------------------------------------------------------------------------
-# Download and unpack Googletest at configure time
-configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if(result)
-  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-  RESULT_VARIABLE result
-  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if (result)
-  message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
+if (BUILD_TESTS)
+  # Download and unpack Googletest at configure time
+  configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+  execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+    RESULT_VARIABLE result
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+  if(result)
+    message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+  endif()
+  execute_process(COMMAND ${CMAKE_COMMAND} --build .
+    RESULT_VARIABLE result
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+  if (result)
+    message(FATAL_ERROR "Build step for googletest failed: ${result}")
+  endif()
 
-# Prevent overriding the parent project's compiler/linker settings on Windows
-#set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  # Prevent overriding the parent project's compiler/linker settings on Windows
+  #set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-# Add googletest directly to our build. This defines the gtest and gtest_main targets.
-add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
-                 ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
-                 EXCLUDE_FROM_ALL)
-
+  # Add googletest directly to our build. This defines the gtest and gtest_main targets.
+  add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
+                  ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
+                  EXCLUDE_FROM_ALL)
+endif(BUILD_TESTS)
 #---------------------------------------------------------------------------------------------------
 # Find files for this repository - this needs to be updated for every new src file.
 #---------------------------------------------------------------------------------------------------
@@ -38,7 +39,6 @@ set(SOURCES
 )
 set(TESTFILES
     tests/Example_Test.cpp
-    tests/JSONParserTest.cpp
 )
 set(LIBRARY_NAME ingreedyents) # Default name for library built from src
 
@@ -49,22 +49,23 @@ set(LIBRARY_NAME ingreedyents) # Default name for library built from src
 add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 
 # Include headers.
-#target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 include_directories(include)
 include_directories(external/include)
+include_directories(${CURL_INCLUDE_DIRS}) # For using libcurl for HTTPS requests.
 
+message( curl found: ${CURL_FOUND} )
+message( Curl directories: ${CURL_INCLUDE_DIRS} )
 add_executable(${LIBRARY_NAME}_main ${SOURCES})
-
-#target_include_directories(${LIBRARY_NAME}_main PRIVATE ${PROJECT_SOURCE_DIR}/include)
-
 
 # Link the executable to the library.
 # NOTE: we don't have to do this yet since we don't make any libraries at the moment.
 #target_link_libraries(main PRIVATE ${LIBRARY_NAME}) # Link executable to the library.
 
 # Link the googletest library with the executable
-add_executable(ingredient_result_test tests/JSONParserTest.cpp src/ingredient_result.cpp)
-target_link_libraries(ingredient_result_test gtest_main)
+if(BUILD_TESTS)
+  add_executable(ingredient_result_test tests/IngredientResultTest.cpp src/ingredient_result.cpp)
+  target_link_libraries(ingredient_result_test gtest_main)
+endif(BUILD_TESTS)
 
 set_target_properties(
   ${LIBRARY_NAME} ${LIBRARY_NAME}_main
