@@ -1,8 +1,7 @@
 #include "example.h"
-// #include "HTTPRequest.hpp"
-#include "httplib.h"
 #include <iostream>
 #include <string>
+#include <curl/curl.h>
 using namespace std;
 
 const int HTTPS_PORT = 443;
@@ -11,35 +10,43 @@ int main () {
   example my_example;
   my_example.print_hello();
 
+  // string protocol = "https://";
+  // string base_url = "api.spoonacular.com";
+  // string base_local = "/recipes/bagel/information?apiKey=";
+  // string api_key = "0bd3f2b62e014ddc80ec18210705d8e8";
+
   string protocol = "https://";
-  string base_url = "api.spoonacular.com";
-  string base_local = "/recipes/bagel/information?apiKey=";
-  string api_key = "0bd3f2b62e014ddc80ec18210705d8e8";
-  // Attempting to make an HTTP request.
-  // try
-  // {
-  //   http::Request request(base_str+api_key);
+  string base_url = "postman-echo.com";
+  string base_local = "/get?foo1=bar1&foo2=bar2";
 
-  //   // send a get request.
-  //   const http::Response getResponse = request.send("GET");
-  //   cout << string(getResponse.body.begin(), getResponse.body.end()) << endl;
-  // }
-  // catch (const std::exception& e)
-  // {
-  //   cerr << "Request failed, error: " << e.what() << endl;
-  // }
+  CURL* curl;
+  CURLcode res;
 
-  // Actually need a library with HTTPS support. Trying out httplib.h now.
-  httplib::Client my_cli(base_url, HTTPS_PORT);
-  auto res = my_cli.Get((base_local+api_key).c_str());
-  cout << res->body << endl;
+  curl_global_init(CURL_GLOBAL_DEFAULT);
+  curl = curl_easy_init();
+  if (curl) {
+    curl_easy_setopt(curl, CURLOPT_URL, protocol+base_url);
 
-  // httplib::Client test_cli("httpbin.org");
+#ifdef SKIP_PEER_VERIFICATION
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+#endif
 
-  // auto res = test_cli.Get("/range/32", {
-  //   httplib::make_range_header({{1, 10}})
-  // });
-  // cout << "res->status: " << res->status << endl;
-  // cout << "res->body: " << res->body << endl;
+#ifdef SKIP_HOSTNAME_VERIFICATION
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+#endif 
+    // Perform the request. res gets the return code.
+    res = curl_easy_perform(curl);
+
+    // Check for errors.
+    if (res != CURLE_OK)
+      cout << "curl_easy_perform() failed: " << curl_easy_strerror(res) << endl;
+
+    // Always cleanup
+    curl_easy_cleanup(curl);
+  }
+
+  curl_global_cleanup();
+
+  
   return 0;
 }
