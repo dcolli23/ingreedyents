@@ -1,3 +1,4 @@
+#pragma once
 #include "gtest/gtest.h"
 #include "ingredient_result.h"
 #include <string>
@@ -26,9 +27,4 @@ TEST(IngredientResultTest, TestCarbParse) {
   IngredientResult ir(test_body);
 
   ASSERT_EQ(ir.get_body(), test_body);
-}
-
-int main (int argc, char* argv[]) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
 }

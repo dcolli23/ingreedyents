@@ -33,7 +33,6 @@ endif(BUILD_TESTS)
 # Find files for this repository - this needs to be updated for every new src file.
 #---------------------------------------------------------------------------------------------------
 set(SOURCES
-    app/main.cpp
     src/example.cpp
     src/ingredient_result.cpp
 )
@@ -41,6 +40,14 @@ set(TESTFILES
     tests/Example_Test.cpp
 )
 set(LIBRARY_NAME ingreedyents) # Default name for library built from src
+
+#---------------------------------------------------------------------------------------------------
+# Library linking flags.
+#---------------------------------------------------------------------------------------------------
+
+set(MAIN_LIB_FLAGS
+    -lcurl
+)
 
 #---------------------------------------------------------------------------------------------------
 # Build stuff - also change when needed.
@@ -51,20 +58,20 @@ add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
 # Include headers.
 include_directories(include)
 include_directories(external/include)
-include_directories(${CURL_INCLUDE_DIRS}) # For using libcurl for HTTPS requests.
+include_directories( /usr/include/x86_64-linux-gnu ) # For using libcurl for HTTPS requests.
 
 message( curl found: ${CURL_FOUND} )
 message( Curl directories: ${CURL_INCLUDE_DIRS} )
-add_executable(${LIBRARY_NAME}_main ${SOURCES})
+add_executable(${LIBRARY_NAME}_main app/main.cpp ${SOURCES})
 
-# Link the executable to the library.
-# NOTE: we don't have to do this yet since we don't make any libraries at the moment.
-#target_link_libraries(main PRIVATE ${LIBRARY_NAME}) # Link executable to the library.
+# Link the libcurl libraries to our executable.
+target_link_libraries(${LIBRARY_NAME}_main ${MAIN_LIB_FLAGS})
 
 # Link the googletest library with the executable
 if(BUILD_TESTS)
-  add_executable(ingredient_result_test tests/IngredientResultTest.cpp src/ingredient_result.cpp)
-  target_link_libraries(ingredient_result_test gtest_main)
+  include_directories( tests/include )
+  add_executable(ingredient_result_test tests/main.cpp ${SOURCES})
+  target_link_libraries(ingredient_result_test gtest_main ${MAIN_LIB_FLAGS})
 endif(BUILD_TESTS)
 
 set_target_properties(
