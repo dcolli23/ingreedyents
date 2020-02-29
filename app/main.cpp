@@ -17,7 +17,7 @@ int main () {
 
   string protocol = "https://";
   string base_url = "postman-echo.com";
-  string base_local = "/get?foo1=bar1&foo2=bar2.html";
+  string base_local = "/get?foo1=bar1&foo2=bar2";
 
   CURL* curl;
   CURLcode res;
@@ -25,8 +25,9 @@ int main () {
   curl_global_init(CURL_GLOBAL_DEFAULT);
   curl = curl_easy_init();
   if (curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, protocol+base_url+base_local);
+    curl_easy_setopt(curl, CURLOPT_URL, (protocol+base_url+base_local).c_str());
     // curl_easy_setopt(curl, CURLOPT_URL, "https://curl.haxx.se/mail/lib-2019-10/0090.html");
+    // curl_easy_setopt(curl, CURLOPT_URL, "https://postman-echo.com/get?foo1=bar1&foo2=bar2");
 
 #ifdef SKIP_PEER_VERIFICATION
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
