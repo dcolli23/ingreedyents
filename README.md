@@ -115,13 +115,13 @@ To build and run all tests, simply execute `./run_tests.sh` in the repository's 
 
 This project uses the `googletest` framework for testing functionality. This is the process for writing a new test suite.
 
-Note: Test suite is used to refere to a new group of tests indepenedent from other tests. In this repository, we're making a new executable for each test suite and writing a new test suite for each class.
+Note: Test suite is used to refer to a new group of tests indepenedent from other tests. In this repository, we're making a new header file for each test suite and writing a new test suite for each class.
 
-1. Make a new `.cpp` file in the `/tests/` directory of the repository. Name it the name of the test suite.
-2. In the new `<test_suite>.cpp` file, write the following as boilerplate:
+1. Make a new `.h` file in the `/tests/include` directory of the repository. Name it the name of the test suite.
+2. In the new `<test_suite>.h` file, write the following as boilerplate:
     ```c++
-    #include "gtest/gtest.h"
     #include "<name_of_class_under_test>"
+    #include "gtest/gtest.h"
 
     // insert any test fixtures here.
 
@@ -130,18 +130,8 @@ Note: Test suite is used to refere to a new group of tests indepenedent from oth
       //    ASSERT_*(x, y) when you want the test to halt on failure.
       //    EXPECT_*(x, y) when you want the test to continue upon failure.
     }
-
-    int main (int argc, char* argv[]) {
-      ::testing::InitGoogleTest(&argc, argv);
-      return RUN_ALL_TESTS();
-    }
     ```
 3. Write the first test that you would like.
-4. In `/CMakeLists.txt`, add the following for your new test suite:
-    ```cmake
-    add_executable(<test_suite_name> tests/<test_suite_name>.cpp src/<class_under_test>.cpp)
-    target_link_libraries(<test_suite_name> gtest_main)
-    ```
-5. Append `./<test_suite_name>` to `/run_tests.sh`
+4. In `tests/main.cpp`, `include` your new test suite header file.
 
 
