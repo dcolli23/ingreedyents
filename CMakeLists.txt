@@ -70,8 +70,8 @@ target_link_libraries(${LIBRARY_NAME}_main ${MAIN_LIB_FLAGS})
 # Link the googletest library with the executable
 if(BUILD_TESTS)
   include_directories( tests/include )
-  add_executable(ingredient_result_test tests/main.cpp ${SOURCES})
-  target_link_libraries(ingredient_result_test gtest_main ${MAIN_LIB_FLAGS})
+  add_executable(test_main tests/main.cpp ${SOURCES})
+  target_link_libraries(test_main gtest_main ${MAIN_LIB_FLAGS})
 endif(BUILD_TESTS)
 
 set_target_properties(

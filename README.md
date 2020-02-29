@@ -5,6 +5,7 @@
 
 + [Overview](#overview)
 + [Language](#language)
++ [Building](#building)
 + [Plan of Action](#plan-of-action)
   + [Reading the UPC](#reading-the-upc)
   + [Getting the Product Information](#getting-the-product-information)
@@ -35,6 +36,41 @@ So I know I can do all of the above in Python except for #1. I'm not sure how to
 # Language
 
 I've chosen to do this in C++. It's a fun project and will be a good challenge for me. I can also try and implement a barcode scanner using OpenCV with C++, so that will be really fun.
+
+# Building
+
+Ingreedyents is built using CMake. To build ingreedyents and run all tests, type the following in a terminal while in the root directory of the repository:
+
+```
+rm -rf build
+mkdir build && cd build
+cmake -DBUILD_TESTS=ON ..
+make
+./test_main
+```
+
+CMake will automatically pull the `googletest` framework for you. Alternatively, you can run:
+
+```
+./run_tests.sh
+```
+
+In the root of the repository.
+
+If you would like to build ingreedyents without running tests, type the following in a terminal while in the root directory of the repository:
+
+```
+rm -rf build
+mkdir build && cd build
+cmake -DBUILD_TESTS=OFF ..
+make
+```
+
+Alternatively, you can run:
+
+```
+./build_app_no_tests.sh
+```
 
 # Plan of Action
 This is where I'm going to jot down my notes on my plan of attack for all of this.
