@@ -1,4 +1,4 @@
-#include "ingredient_result.h"
+#include "IngredientResult.h"
 
 IngredientResult::IngredientResult(string json_result_string) {
   body = json_result_string;

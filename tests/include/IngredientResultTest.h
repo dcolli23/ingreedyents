@@ -1,6 +1,6 @@
 #pragma once
 #include "gtest/gtest.h"
-#include "ingredient_result.h"
+#include "IngredientResult.h"
 #include <string>
 #include <fstream>
 #include <iostream>

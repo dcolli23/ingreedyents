@@ -10,4 +10,11 @@ public:
 
 private:
   string body;
+  
+  // Ingredient information.
+  string ingredient_name;
+  int carbs_grams;
+  int fat_grams;
+  int protein_grams;
+
 };
