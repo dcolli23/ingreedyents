@@ -33,3 +33,6 @@
 
 # Build directory
 build/
+
+# Documentation folder
+docs/
