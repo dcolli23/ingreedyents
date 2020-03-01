@@ -11,6 +11,7 @@
   + [Getting the Product Information](#getting-the-product-information)
   + [Obtaining the Optimized Recipe Choices](#obtaining-the-optimized-recipe-choices)
   + [User Interface to Select Recipe](#user-interface-to-select-recipe)
++ [Documentation](#documentation)
 + [Testing](#testing)
   + [Running Tests](#running-tests)
   + [Writing Tests](#writing-tests)
@@ -104,6 +105,18 @@ This will likely be completed by making a request to a recipe API. Spoonacular s
 ## User Interface to Select Recipe
 
 I've done some research on developing using the Qt framework and it seems to be easy enough. I'm likely going to choose this.
+
+# Documentation
+
+The documentation for this repository is built using Doxygen. To install Doxygen, follow the installation instructions located [here](http://www.doxygen.nl/manual/install.html).
+
+To build the documentation, run the following in the `docs` folder:
+
+```
+doxygen Doxyfile
+```
+
+or load the Doxyfile in the Doxywizard GUI and run it.
 
 # Testing
 

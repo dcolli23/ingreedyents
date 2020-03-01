@@ -12,7 +12,7 @@ TEST(HTTPSGETterTest, InitializationTest) {
 TEST(HTTPSGETterTest, VerifyGETAgainstKnownSource) {
   HTTPSGETter my_getter;
   string test_URL = "https://postman-echo.com/get?foo1=bar1&foo2=bar2";
-  my_getter.set_URL(test_URL.c_str());
+  my_getter.set_URL(test_URL);
   my_getter.make_request();
   string request_body = my_getter.get_request_body();
 

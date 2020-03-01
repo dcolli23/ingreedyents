@@ -34,7 +34,7 @@ endif(BUILD_TESTS)
 #---------------------------------------------------------------------------------------------------
 set(SOURCES
     src/example.cpp
-    src/ingredient_result.cpp
+    src/IngredientResult.cpp
     src/HTTPSGETter.cpp
 )
 set(TESTFILES
