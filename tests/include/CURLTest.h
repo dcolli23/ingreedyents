@@ -3,9 +3,11 @@
 #include <string>
 
 TEST(CURLTest, InitCURL) {
+  bool curl_initialized_correctly = false;
   CURL* curl;
   curl = curl_easy_init();
-  // EXPECT_EQ(curl, true);
+  if (curl != NULL) curl_initialized_correctly = true;
+  EXPECT_EQ(curl_initialized_correctly, true);
   curl_global_cleanup();
 }
 
