@@ -1,6 +1,9 @@
 {
   "cmake.configureOnOpen": true,
   "files.associations": {
-    "string": "cpp"
+    "string": "cpp",
+    "iosfwd": "cpp",
+    "string_view": "cpp",
+    "regex": "cpp"
   }
 }
