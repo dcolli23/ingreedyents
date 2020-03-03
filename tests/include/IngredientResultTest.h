@@ -22,9 +22,49 @@ const std::string JSON_RESULT_LOCATION = "../tests/data/ingredient_get_result.js
 // }
 // JSON_RESULT_STRING = 
 
-TEST(IngredientResultTest, TestCarbParse) {
-  std::string test_body = "{\"a\": 5}";
-  IngredientResult ir(test_body);
+class IngredientResultTest : public testing::Test {
+  protected:
+    IngredientResult* my_result;
 
-  ASSERT_EQ(ir.get_body(), test_body);
+    // Set up the IngredientResult during each test.
+    void SetUp() override {
+      // Read in the JSON result file as a string.
+      std::ifstream fin(JSON_RESULT_LOCATION);
+      std::string json_str;
+      
+      fin.seekg(0, std::ios::end);
+      json_str.reserve(fin.tellg());
+      fin.seekg(0, std::ios::beg);
+
+      json_str.assign((std::istreambuf_iterator<char>(fin)), std::istreambuf_iterator<char>());
+      
+      // Initialize the new IngredientResult.
+      my_result = new IngredientResult(json_str);
+      my_result->parse_body();
+    }
+    void TearDown() override {}
+};
+
+TEST_F(IngredientResultTest, TestCalorieParse) {
+  double calorie_truth = 30.0;
+
+  EXPECT_EQ(my_result->get_calories(), calorie_truth);
+}
+
+TEST_F(IngredientResultTest, TestCarbParse) {
+  int carb_truth = 8;
+
+  EXPECT_EQ(my_result->get_carbs(), carb_truth);
+}
+
+TEST_F(IngredientResultTest, TestFatParse) {
+  int fat_truth = 0;
+
+  EXPECT_EQ(my_result->get_fat(), fat_truth);
+}
+
+TEST_F(IngredientResultTest, TestProteinParse) {
+  int protein_truth = 0;
+
+  EXPECT_EQ(my_result->get_protein(), protein_truth);
 }
