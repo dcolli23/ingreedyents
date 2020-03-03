@@ -5,8 +5,10 @@ HTTPSGETter::HTTPSGETter() {
   request_body = "";
 }
 
+//! Sets the URL to make the GET request from
 void HTTPSGETter::set_URL(string new_URL) { URL = new_URL; }
 
+//! Makes the HTTPS GET request and writes result to `request_body`
 void HTTPSGETter::make_request() {
   CURL* curl;
   CURLcode res;
@@ -26,6 +28,7 @@ void HTTPSGETter::make_request() {
   }
 }
 
+//! Callback function supplied to cURL for writing request result to `request_body`
 size_t HTTPSGETter::cURL_stdstring_callback_writer(void* contents, size_t size, size_t nmemb, 
     string* s) {
   size_t new_length = size * nmemb;
@@ -39,4 +42,5 @@ size_t HTTPSGETter::cURL_stdstring_callback_writer(void* contents, size_t size, 
   return new_length;
 }
 
+//! Returns `request_body`
 string HTTPSGETter::get_request_body() { return request_body; }
