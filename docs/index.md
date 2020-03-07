@@ -1,7 +1,46 @@
 ---
 # This is the front matter, this provides metadata on the page.
-title: Home Page
 permalink: /
 ---
 
-This is the home page.
+<div class="header-container jumbotron">
+    <div class="container">
+        <h1>Ingreedyents</h1>
+        <p>Ingredient/recipe matcher for fun ways to discover new recipes with ingredients already in your pantry!</p>
+        <!-- <p><a class="btn btn-primary btn-lg" href="{{ "/docs/home/" | relative_url }}" role="button">Learn more</a></p> -->
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="header-light regular-pad">What is Ingreedyents?</h2>
+              <p class="lead">Ingreedyents is fun.</p>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="{{ "/assets/img/header.JPG" | relative_url }}" alt="Ingreedyents logo" class="img-responsive">
+        </div>
+    </div>
+    <hr>
+    <!-- <div class="row">
+        <div class="col-sm-4">
+            <h1 class="text-center"><i class="fa fa-pencil" aria-hidden="true"></i></h1>
+            <h3 class="text-center">Easy to install and publish</h3>
+            <p>Get started by cloning source into GitHub account of your project. Thanks to <a href="https://pages.github.com">GitHub Pages</a>,
+              it will be automatically compiled and published under your account's (or organisation's) subdomain under <code>github.io</code>.
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h1 class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i></h1>
+            <h3 class="text-center">Modular Styling and Templating</h3>
+            <p>This template uses <a href="https://github.com/twbs/bootstrap-sass">bootstrap-sass</a> along with <a href="https://bootswatch.com/">Bootwatch themes</a>.
+            You can change the theme or write your custom one by overwriting bootstrap sass variables for a different color set, font options, etc.</p>
+        </div>
+        <div class="col-sm-4">
+            <h1 class="text-center"><i class="fa fa-code-fork" aria-hidden="true"></i></h1>
+            <h3 class="text-center">Git-based source control</h3>
+            <p>Leverage from Git version control system by
+              maintaining your documentation along with the source code; publish the page when you merge to the master branch.</p>
+        </div>
+    </div> -->
+</div>
