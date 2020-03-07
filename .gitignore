@@ -34,5 +34,6 @@
 # Build directory
 build/
 
-# Documentation folder
-#docs/
+# Generated Jekyll files
+docs/_site
+docs/Gemfile.lock
