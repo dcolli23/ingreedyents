@@ -36,6 +36,7 @@ set(SOURCES
     src/example.cpp
     src/IngredientResult.cpp
     src/HTTPSGETter.cpp
+    src/JSONErr.cpp
 )
 set(TESTFILES
     tests/Example_Test.cpp

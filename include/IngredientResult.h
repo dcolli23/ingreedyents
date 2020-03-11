@@ -1,3 +1,5 @@
+#include "JSONErr.h"
+
 #include "rapidjson/document.h"
 
 #include <string>
