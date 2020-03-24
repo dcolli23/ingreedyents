@@ -1,3 +1,4 @@
+#pragma once
 #include "JSONErr.h"
 
 #include "rapidjson/document.h"
