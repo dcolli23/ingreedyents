@@ -4,6 +4,7 @@
 #include "IngredientResultTest.h"
 #include "CURLTest.h"
 #include "HTTPSGETterTest.h"
+#include "IngredientRequestTest.h"
 
 int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
