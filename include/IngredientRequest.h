@@ -11,7 +11,7 @@ const string BASE_URL = "https://api.spoonacular.com/food/products/upc/" + UPC_F
 
 class IngredientRequest {
 public:
-  IngredientRequest(string UPC);
+  IngredientRequest(string UPC, string API_key);
   ~IngredientRequest();
 
   // void set_UPC();
@@ -23,6 +23,7 @@ public:
   
 
 private:
+  string API_key;
   string UPC;
   string URL;
   IngredientResult* result;

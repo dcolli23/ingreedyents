@@ -5,7 +5,8 @@
 //!
 //! This class is meant to handle the retrieval and parsing of an ingredient when supplied the
 //! UPC via an HID (human interface device).
-IngredientRequest::IngredientRequest(string UPC) { 
+IngredientRequest::IngredientRequest(string UPC, string API_key) {
+  this->API_key = API_key;
   this->UPC = UPC;
   result = nullptr;
   getter = nullptr;
@@ -22,19 +23,15 @@ IngredientRequest::~IngredientRequest() {
   }
 }
 
-//! Replaces the formatted URL with the UPC supplied
+//! Replaces the formatted URL with the UPC and API key supplied
 void IngredientRequest::form_URL() {
   int start_idx;
   int substr_len = UPC_FORMATTER.length();
 
-  cout << "URL: " << URL << endl;
-
-  cout << substr_len << endl;
-
   start_idx = URL.find(UPC_FORMATTER);
-  cout << start_idx << endl;
   URL.replace(start_idx, substr_len, UPC);
-  cout << URL << endl;
+
+  URL += "apiKey=" + API_key;
 }
 
 //! Returns the URL
