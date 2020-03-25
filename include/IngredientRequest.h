@@ -14,10 +14,9 @@ public:
   IngredientRequest(string UPC, string API_key);
   ~IngredientRequest();
 
-  // void set_UPC();
+  IngredientResult* make_request();
 
   string get_URL();
-
 
   void form_URL();
   

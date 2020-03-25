@@ -36,3 +36,18 @@ void IngredientRequest::form_URL() {
 
 //! Returns the URL
 string IngredientRequest::get_URL() { return URL; }
+
+//! Returns the result of the request made with the formed URL.
+//! 
+//! Note: `IngredientRequest::form_URL` must be called before this function.
+IngredientResult* IngredientRequest::make_request() {
+  // Make the request with the HTTPSGETter.
+  getter = new HTTPSGETter();
+  getter->set_URL(URL);
+  getter->make_request();
+
+  // Parse the result with the IngredientResult.
+  result = new IngredientResult(getter->get_request_body());
+
+  return result;
+}
