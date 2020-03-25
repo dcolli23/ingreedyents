@@ -37,6 +37,7 @@ set(SOURCES
     src/HTTPSGETter.cpp
     src/JSONErr.cpp
     src/IngredientRequest.cpp
+    src/UPC_CLI.cpp
 )
 set(TESTFILES
     tests/Example_Test.cpp
