@@ -18,7 +18,10 @@ public:
   ~IngredientResult();
 
   void set_body(string body);
+  
   string get_body();
+  int get_ID();
+  string get_ingredient_name();
   double get_calories();
   int get_carbs();
   int get_fat();

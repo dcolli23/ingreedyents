@@ -12,6 +12,12 @@ void IngredientResult::set_body(string body) { this->body = body; }
 //! Returns the unparsed `body` of the HTTPS GET request as a string
 string IngredientResult::get_body() { return body; }
 
+//! Returns the ID for this ingredient
+int IngredientResult::get_ID() { return ID; }
+
+//! Returns the name of the ingredient
+string IngredientResult::get_ingredient_name() { return ingredient_name; }
+
 //! Returns the calories of the ingredient per serving size
 double IngredientResult::get_calories() { return calories; }
 

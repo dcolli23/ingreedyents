@@ -45,6 +45,18 @@ class IngredientResultTest : public testing::Test {
     void TearDown() override {}
 };
 
+TEST_F(IngredientResultTest, TestIDParse) {
+  int ID_truth = 30004;
+
+  EXPECT_EQ(my_result->get_ID(), ID_truth);
+}
+
+TEST_F(IngredientResultTest, TestNameParse) {
+  string name_truth = "Swan Flour";
+
+  EXPECT_EQ(my_result->get_ingredient_name(), name_truth);
+}
+
 TEST_F(IngredientResultTest, TestCalorieParse) {
   double calorie_truth = 30.0;
 
