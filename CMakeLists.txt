@@ -37,6 +37,7 @@ set(SOURCES
     src/IngredientResult.cpp
     src/HTTPSGETter.cpp
     src/JSONErr.cpp
+    src/IngredientRequest.cpp
 )
 set(TESTFILES
     tests/Example_Test.cpp
@@ -70,11 +71,11 @@ add_executable(${LIBRARY_NAME}_main app/main.cpp ${SOURCES})
 target_link_libraries(${LIBRARY_NAME}_main ${MAIN_LIB_FLAGS})
 
 # Link the googletest library with the executable
-if(BUILD_TESTS)
+if(BUILD_TESTS OR RUN_TESTS)
   include_directories( tests/include )
   add_executable(test_main tests/main.cpp ${SOURCES})
   target_link_libraries(test_main gtest_main ${MAIN_LIB_FLAGS})
-endif(BUILD_TESTS)
+endif(BUILD_TESTS OR RUN_TESTS)
 
 set_target_properties(
   ${LIBRARY_NAME} ${LIBRARY_NAME}_main
