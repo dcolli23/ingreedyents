@@ -7,6 +7,10 @@
 #include <iostream>
 using namespace std;
 
+const int INVALID_INT = -1;
+const string INVALID_STRING = "INVALID_STRING";
+const double INVALID_DOUBLE = -1.0;
+
 //! Class for parsing the body of the HTTPS GET request
 /*!
  * Responsible for parsing the body of the HTTPS GET request (a JSON string) and storing results
@@ -41,5 +45,4 @@ private:
   int carbs_grams;
   int fat_grams;
   int protein_grams;
-
 };

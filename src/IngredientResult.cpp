@@ -2,6 +2,12 @@
 
 IngredientResult::IngredientResult(string json_result_string) {
   body = json_result_string;
+  ID = INVALID_INT;
+  ingredient_name = INVALID_STRING;
+  calories = INVALID_DOUBLE;
+  carbs_grams = INVALID_INT;
+  fat_grams = INVALID_INT;
+  protein_grams = INVALID_INT;
 }
 
 IngredientResult::~IngredientResult() {}
