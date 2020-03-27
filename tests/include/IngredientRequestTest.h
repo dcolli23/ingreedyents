@@ -20,7 +20,7 @@ TEST_F(IngredientRequestTest, FormURLTest) {
   my_result->form_URL();
   string URL_test = my_result->get_URL();
   string URL_truth = "https://api.spoonacular.com/food/products/upc/" + UPC 
-    + "/information?apiKey=XXX";
+    + "?apiKey=XXX";
   
   EXPECT_EQ(URL_test, URL_truth) << "URL did not form correctly!";
 }

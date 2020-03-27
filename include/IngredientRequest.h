@@ -7,7 +7,7 @@ using namespace std;
 
 const string UPC_FORMATTER = "{UPC}";
 const string BASE_URL = "https://api.spoonacular.com/food/products/upc/" + UPC_FORMATTER
-  + "/information?";
+  + "?";
 
 class IngredientRequest {
 public:
