@@ -35,7 +35,7 @@ endif(BUILD_TESTS)
 set(SOURCES
     src/IngredientResult.cpp
     src/HTTPSGETter.cpp
-    src/JSONErr.cpp
+    src/JSONFuncs.cpp
     src/IngredientRequest.cpp
     src/UPC_CLI.cpp
 )

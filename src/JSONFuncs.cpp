@@ -1,13 +1,36 @@
-#include "JSONErr.h"
+#include "JSONFuncs.h"
+
+//! Reads and parses JSON file at given file path
+void JSONFuncs::parse_json(string json_file_name, rapidjson::Document& doc) {
+  // Read in the JSON file.
+  ifstream ifs;
+  ifs.open(json_file_name);
+  if (ifs.fail()) {
+    cout << "Could not open JSON file, \"" << json_file_name << "\" for reading!" << endl;
+    exit(1);
+  }
+  rapidjson::IStreamWrapper isw(ifs);
+
+  // Parse the JSON into Document class.
+  rapidjson::ParseResult parse_ok = doc.ParseStream(isw);
+
+  if (!parse_ok) {
+    cout << "JSON parsing error. Double check your JSON file \""
+      << json_file_name << "\" (" << parse_ok.Offset() << ')' << endl;
+  }
+
+  // Close the file.
+  ifs.close();
+}
 
 //! Catches a fatal exception and exits the program
-void JSONErr::catch_fatal_exception(exception& e) {
+void JSONFuncs::catch_fatal_exception(exception& e) {
   cout << "Exception: " << e.what() << endl;
   exit(1);
 }
 
 //! Checks that the doc has member given by `mem_name`, returns true if member exists
-bool JSONErr::check_doc_has_member(const rapidjson::Value& doc, const char mem_name[], 
+bool JSONFuncs::check_doc_has_member(const rapidjson::Value& doc, const char mem_name[], 
                                    string& e_string) {
   bool has_mem = true;
   if (!doc.HasMember(mem_name)) {
@@ -19,7 +42,7 @@ bool JSONErr::check_doc_has_member(const rapidjson::Value& doc, const char mem_n
 }
 
 //! Checks that the index `ind` is a valid index in the given `doc` array indicated by `mem_name`
-bool JSONErr::check_doc_valid_array_index(const rapidjson::Value& doc, const char mem_name[], 
+bool JSONFuncs::check_doc_valid_array_index(const rapidjson::Value& doc, const char mem_name[], 
                                           rapidjson::SizeType ind, string& e_string) {
   bool is_valid = true;
   if (ind >= doc[mem_name].Size()) {
@@ -31,7 +54,7 @@ bool JSONErr::check_doc_valid_array_index(const rapidjson::Value& doc, const cha
 }
 
 //! Checks the given JSON member is an object
-void JSONErr::check_doc_member_object(const rapidjson::Value& doc, const char mem_name[]) {
+void JSONFuncs::check_doc_member_object(const rapidjson::Value& doc, const char mem_name[]) {
   string e_string;
   try {
     bool has_member = check_doc_has_member(doc, mem_name, e_string);
@@ -46,7 +69,7 @@ void JSONErr::check_doc_member_object(const rapidjson::Value& doc, const char me
 }
 
 //! Checks the given JSON member is a number
-void JSONErr::check_doc_member_number(const rapidjson::Value& doc, const char mem_name[]) {
+void JSONFuncs::check_doc_member_number(const rapidjson::Value& doc, const char mem_name[]) {
   string e_string;
   try {
     bool has_member = check_doc_has_member(doc, mem_name, e_string);
@@ -61,7 +84,7 @@ void JSONErr::check_doc_member_number(const rapidjson::Value& doc, const char me
 }
 
 //! Checks the given JSON member is a number in the `mem_name` array at `ind`
-void JSONErr::check_doc_member_number(const rapidjson::Value& doc, const char mem_name[],
+void JSONFuncs::check_doc_member_number(const rapidjson::Value& doc, const char mem_name[],
                                       rapidjson::SizeType ind) {
   string e_string;
   try {
@@ -77,7 +100,7 @@ void JSONErr::check_doc_member_number(const rapidjson::Value& doc, const char me
 }
 
 //! Checks the given JSON member is an integer
-void JSONErr::check_doc_member_int(const rapidjson::Value& doc, const char mem_name[]) {
+void JSONFuncs::check_doc_member_int(const rapidjson::Value& doc, const char mem_name[]) {
   string e_string;
   try {
     bool has_member = check_doc_has_member(doc, mem_name, e_string);
@@ -92,7 +115,7 @@ void JSONErr::check_doc_member_int(const rapidjson::Value& doc, const char mem_n
 }
 
 //! Checks the given JSON member is an array
-void JSONErr::check_doc_member_array(const rapidjson::Value& doc, const char mem_name[]) {
+void JSONFuncs::check_doc_member_array(const rapidjson::Value& doc, const char mem_name[]) {
   string e_string;
   try {
     bool has_member = check_doc_has_member(doc, mem_name, e_string);
@@ -107,7 +130,7 @@ void JSONErr::check_doc_member_array(const rapidjson::Value& doc, const char mem
 }
 
 //! Checks the given JSON member is a string
-void JSONErr::check_doc_member_string(const rapidjson::Value& doc, const char mem_name[]) {
+void JSONFuncs::check_doc_member_string(const rapidjson::Value& doc, const char mem_name[]) {
   string e_string;
   try {
     bool has_member = check_doc_has_member(doc, mem_name, e_string);
@@ -122,7 +145,7 @@ void JSONErr::check_doc_member_string(const rapidjson::Value& doc, const char me
 }
 
 //! Checks the given JSON member is a string in the `mem_name` array at `ind`
-void JSONErr::check_doc_member_string(const rapidjson::Value& doc, const char mem_name[],
+void JSONFuncs::check_doc_member_string(const rapidjson::Value& doc, const char mem_name[],
                                       rapidjson::SizeType ind) {
   string e_string;
   try {

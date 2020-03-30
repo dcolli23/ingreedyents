@@ -1,5 +1,5 @@
 #pragma once
-#include "JSONErr.h"
+#include "JSONFuncs.h"
 
 #include "rapidjson/document.h"
 

@@ -1,11 +1,14 @@
 #pragma once
 #include <rapidjson/document.h>
+#include <rapidjson/istreamwrapper.h>
 
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
-namespace JSONErr {
+namespace JSONFuncs {
+  void parse_json(string json_file_name, rapidjson::Document& doc);
   void catch_fatal_exception(exception& e);
   bool check_doc_has_member(const rapidjson::Value& doc, const char mem_name[], string& e_string);
   bool check_doc_valid_array_index(const rapidjson::Value& doc, const char mem_name[], 
