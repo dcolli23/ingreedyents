@@ -5,6 +5,8 @@
 #include "CURLTest.h"
 #include "HTTPSGETterTest.h"
 #include "IngredientRequestTest.h"
+#include "NutrientTest.h"
+#include "JSONFuncsTest.h"
 
 int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);
