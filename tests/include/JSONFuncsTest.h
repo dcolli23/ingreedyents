@@ -11,10 +11,12 @@ const string JSON_EX_FILE_1 = "../tests/data/example_nutrient.json";
 
 class JSONFuncsTest : public testing::Test {
   protected :
-    rapidjson::Document* p_doc = new rapidjson::Document();
-    string* p_e_string = new string("");
+    rapidjson::Document* p_doc;
+    string* p_e_string;
 
     void SetUp() override {
+      p_doc = new rapidjson::Document();
+      p_e_string = new string("");
       JSONFuncs::parse_json(JSON_EX_FILE_1, *p_doc);
     }
 };
