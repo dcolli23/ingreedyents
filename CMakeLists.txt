@@ -38,6 +38,7 @@ set(SOURCES
     src/JSONFuncs.cpp
     src/IngredientRequest.cpp
     src/UPC_CLI.cpp
+    src/Nutrient.cpp
 )
 set(TESTFILES
     tests/Example_Test.cpp
