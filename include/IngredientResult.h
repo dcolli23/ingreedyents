@@ -1,10 +1,12 @@
 #pragma once
 #include "JSONFuncs.h"
+#include "Nutrient.h"
 
 #include "rapidjson/document.h"
 
 #include <string>
 #include <iostream>
+#include <map>
 using namespace std;
 
 const int INVALID_INT = -1;
@@ -41,6 +43,7 @@ private:
   // Ingredient information.
   int ID;
   string ingredient_name;
+  map<string, Nutrient> nutrients;
   double calories;
   int carbs_grams;
   int fat_grams;

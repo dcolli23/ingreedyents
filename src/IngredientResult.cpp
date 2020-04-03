@@ -8,6 +8,28 @@ IngredientResult::IngredientResult(string json_result_string) {
   carbs_grams = INVALID_INT;
   fat_grams = INVALID_INT;
   protein_grams = INVALID_INT;
+
+  // Parse the JSON file string for us.
+  rapidjson::Document doc;
+  doc.Parse(json_result_string.c_str());
+
+  // Populate the nutrients map from our array of nutrients.
+  JSONFuncs::check_doc_member_array(doc, "foodNutrients");
+  const rapidjson::Value& foodNutrients = doc["foodNutrients"];
+  
+  // for (rapidjson::Value::ValueIterator itr = foodNutrients.Begin(); itr != foodNutrients.End(); 
+  //   ++itr) {
+
+  // }
+  
+  // for (auto& v : foodNutrients.GetArray()) {
+    // Verify all of the nutrients are complete.
+  //   JSONFuncs::check_doc_member_object(v, "nutrient");
+  //   JSONFuncs::check_doc_member_string(v["nutrient"], "name");
+
+  //   // Store the nutrient in our map.
+  //   nutrients[v["nutrient"]["name"].GetString()] = Nutrient(v);
+  // }
 }
 
 IngredientResult::~IngredientResult() {}
@@ -48,27 +70,27 @@ void IngredientResult::parse_body() {
     if (!parse_ok) throw runtime_error("JSON did not parse correctly!");
   }
   catch (exception& e) {
-    JSONErr::catch_fatal_exception(e);
+    JSONFuncs::catch_fatal_exception(e);
   }
 
   // Store the ingredient ID.
-  JSONErr::check_doc_member_int(doc, "id");
+  JSONFuncs::check_doc_member_int(doc, "id");
   ID = doc["id"].GetInt();
 
   // Store the ingredient name.
-  JSONErr::check_doc_member_string(doc, "title");
+  JSONFuncs::check_doc_member_string(doc, "title");
   ingredient_name = doc["title"].GetString();
 
   // Store the macro information.
-  JSONErr::check_doc_member_object(doc, "nutrition");
+  JSONFuncs::check_doc_member_object(doc, "nutrition");
   const rapidjson::Value& nutrition = doc["nutrition"];
-  JSONErr::check_doc_member_number(nutrition, "calories");
+  JSONFuncs::check_doc_member_number(nutrition, "calories");
   calories = nutrition["calories"].GetDouble();
-  JSONErr::check_doc_member_string(nutrition, "carbs");
+  JSONFuncs::check_doc_member_string(nutrition, "carbs");
   carbs_grams = get_macro_gram_amount(nutrition["carbs"].GetString());
-  JSONErr::check_doc_member_string(nutrition, "fat");
+  JSONFuncs::check_doc_member_string(nutrition, "fat");
   fat_grams = get_macro_gram_amount(nutrition["fat"].GetString());
-  JSONErr::check_doc_member_string(nutrition, "protein");
+  JSONFuncs::check_doc_member_string(nutrition, "protein");
   protein_grams = get_macro_gram_amount(nutrition["protein"].GetString());
 }
 

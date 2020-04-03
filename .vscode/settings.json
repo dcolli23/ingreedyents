@@ -5,6 +5,8 @@
     "iosfwd": "cpp",
     "string_view": "cpp",
     "regex": "cpp",
-    "iostream": "cpp"
-  }
+    "iostream": "cpp",
+    "ostream": "cpp"
+  },
+  "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }

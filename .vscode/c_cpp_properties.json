@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/external/include"
             ],
             "defines": [],
             "compilerPath": "/usr/local/cuda-9.0/bin/gcc",

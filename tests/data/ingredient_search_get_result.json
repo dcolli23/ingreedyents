@@ -1,0 +1,23 @@
+{
+  "foodSearchCriteria":{
+    "generalSearchInput":"040000249290",
+    "pageNumber":1,
+    "requireAllWords":false
+  },
+  "totalHits":1,
+  "currentPage":1,
+  "totalPages":1,
+  "foods":[
+  {
+    "fdcId":541628,
+    "description":"M&M'S, PEANUT CHOCOLATE CANDIES",
+    "dataType":"Branded",
+    "gtinUpc":"040000249290",
+    "publishedDate":"2019-04-01",
+    "brandOwner":"Mars Chocolate North America LLC",
+    "ingredients":"MILK CHOCOLATE (SUGAR, CHOCOLATE, COCOA BUTTER, SKIM MILK, LACTOSE, MILKFAT, PEANUTS, SOY LECITHIN, SALT, ARTIFICIAL FLAVORS), SUGAR, PEANUTS, CORNSTARCH, LESS THAN 1% - CORN SYRUP, DEXTRIN, COLORING (INCLUDES BLUE 1 LAKE, YELLOW 6, RED 40, YELLOW 5, BLUE 1, YELLOW 6 LAKE, RED 40 LAKE, YELLOW 5 LAKE, BLUE 2 LAKE, BLUE 2), GUM ACACIA.",
+    "allHighlightFields":"<b>GTIN/UPC</b>: <em>040000249290</em>",
+    "score":-741.32605
+  }
+  ]
+}
