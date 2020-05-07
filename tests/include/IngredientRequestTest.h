@@ -13,7 +13,9 @@ class IngredientRequestTest : public testing::Test {
       my_result = new IngredientRequest(UPC, API_KEY);
     }
 
-    void TearDown() override {};
+    void TearDown() override {
+      delete my_result;
+    };
 };
 
 TEST_F(IngredientRequestTest, FormURLTest) {
