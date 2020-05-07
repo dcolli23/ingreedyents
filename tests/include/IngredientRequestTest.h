@@ -6,21 +6,21 @@ const string API_KEY = "XXX"; // Fake API key for testing.
 
 class IngredientRequestTest : public testing::Test {
   protected:
-    IngredientRequest* my_result;
+    IngredientRequest* my_request;
 
     // Set up the IngredientRequest during each test.
     void SetUp() override {
-      my_result = new IngredientRequest(UPC, API_KEY);
+      my_request = new IngredientRequest(UPC, API_KEY);
     }
 
     void TearDown() override {
-      delete my_result;
+      delete my_request;
     };
 };
 
 TEST_F(IngredientRequestTest, FormURLTest) {
-  my_result->form_URL();
-  string URL_test = my_result->get_URL();
+  my_request->form_URL();
+  string URL_test = my_request->get_URL();
   string URL_truth = "https://api.spoonacular.com/food/products/upc/" + UPC 
     + "?apiKey=XXX";
   

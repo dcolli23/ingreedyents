@@ -15,12 +15,10 @@ IngredientRequest::IngredientRequest(string UPC, string API_key) {
 
 //! Destructor
 IngredientRequest::~IngredientRequest() {
-  if (result != nullptr) {
+  if (result)
     delete result;
-  }
-  if (getter != nullptr) {
+  if (getter)
     delete getter;
-  }
 }
 
 //! Replaces the formatted URL with the UPC and API key supplied
