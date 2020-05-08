@@ -28,6 +28,7 @@ remote_theme: aksakalli/jekyll-doc-theme@gh-pages
 The `Gemfile` looks like:
 
 ```gemfile
+source 'https://rubygems.org'
 gem "github-pages", group: :jekyll_plugins
 ```
 
