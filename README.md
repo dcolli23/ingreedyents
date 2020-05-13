@@ -6,6 +6,7 @@
 + [Overview](#overview)
 + [Language](#language)
 + [Building](#building)
+  + [Dependencies](#dependencies)
 + [Plan of Action](#plan-of-action)
   + [Reading the UPC](#reading-the-upc)
   + [Getting the Product Information](#getting-the-product-information)
@@ -72,6 +73,13 @@ Alternatively, you can run:
 ```
 ./build_app_no_tests.sh
 ```
+
+## Dependencies
+
+Ingreedyents relies on the following packages that need to be downloaded on your local machine:
+
+  + `cURL`
+      + You must download `cURL` along with the `cURL.h` header file for using `cURL` within C++ code.
 
 # Plan of Action
 This is where I'm going to jot down my notes on my plan of attack for all of this.
