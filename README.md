@@ -79,7 +79,7 @@ Alternatively, you can run:
 Ingreedyents relies on the following packages that need to be downloaded on your local machine:
 
   + `cURL`
-      + You must download `cURL` along with the `cURL.h` header file for using `cURL` within C++ code.
+      + To install, you must download `cURL` along with the `cURL.h` header file for using `cURL` within C++ code.
 
 # Plan of Action
 This is where I'm going to jot down my notes on my plan of attack for all of this.
