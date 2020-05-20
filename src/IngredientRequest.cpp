@@ -30,12 +30,12 @@ void IngredientRequest::form_FDC_ID_URL() {
   start_idx = FDC_ID_URL.find(UPC_FORMATTER);
   FDC_ID_URL.replace(start_idx, substr_len, UPC);
 
-  FDC_ID_URL += "&apiKey=" + API_key;
+  FDC_ID_URL += "&api_key=" + API_key;
 }
 
 //! Forms the URL for GETting the detailed nutrition information given the FDC ID
 void IngredientRequest::form_detailed_nutrition_URL() {
-  detailed_nutrition_URL += FDC_ID + "?apiKey=" + API_key;
+  detailed_nutrition_URL += FDC_ID + "?api_key=" + API_key;
 }
 
 //! Returns the URL for making the initial request for finding the FDC ID

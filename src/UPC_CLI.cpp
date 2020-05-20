@@ -21,7 +21,7 @@ void UPC_CLI::start_CLI() {
   // Ask for the API key.
   // cout << "Please enter your unique spoonacular API key: ";
   // cin >> API_key;
-  API_key = "0bd3f2b62e014ddc80ec18210705d8e8";
+  API_key = "";
 
   // Ask for user input of UPC codes and make requests for them.
   while (1) {
@@ -34,17 +34,14 @@ void UPC_CLI::start_CLI() {
 
     // Make the request.
     user_request = new IngredientRequest(user_response, API_key);
-    user_request->form_URL();
-
-    cout << "Formed URL: " << user_request->get_URL() << endl;
-
+    user_request->form_FDC_ID_URL();
+    cout << "Formed URL: " << user_request->get_FDC_ID_URL() << endl;
     ing_result = user_request->make_request();
+
     cout << "\tIngredient name: " << ing_result->get_ingredient_name() << endl;
-    // cout << "\tcalories: " << ing_result->get_calories() << endl;
-    // cout << "\tcarbs: " << ing_result->get_carbs() << endl;
-    // cout << "\tfat: " << ing_result->get_fat() << endl;
-    // cout << "\tprotein: " << ing_result->get_protein() << endl;
-    
+    for (auto const& [key, value] : ing_result->nutrients){
+      cout << "\t\t" << key << ": " << value->get_amount() << value->get_unit() << endl;
+    }
   }
 
   cout << "Now exiting the UPC CLI" << endl;

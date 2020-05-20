@@ -8,6 +8,7 @@ IngredientResult::IngredientResult(string json_result_string) {
   // carbs_grams = INVALID_INT;
   // fat_grams = INVALID_INT;
   // protein_grams = INVALID_INT;
+  parse_body();
 }
 
 IngredientResult::~IngredientResult() {}
