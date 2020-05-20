@@ -13,6 +13,8 @@ Nutrient::Nutrient(rapidjson::Value& val) {
 
   JSONFuncs::check_doc_member_string(nutrient_val, "unitName");
   unit = nutrient_val["unitName"].GetString();
+
+  
 }
 
 //! Destructor

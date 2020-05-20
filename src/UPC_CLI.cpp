@@ -40,10 +40,10 @@ void UPC_CLI::start_CLI() {
 
     ing_result = user_request->make_request();
     cout << "\tIngredient name: " << ing_result->get_ingredient_name() << endl;
-    cout << "\tcalories: " << ing_result->get_calories() << endl;
-    cout << "\tcarbs: " << ing_result->get_carbs() << endl;
-    cout << "\tfat: " << ing_result->get_fat() << endl;
-    cout << "\tprotein: " << ing_result->get_protein() << endl;
+    // cout << "\tcalories: " << ing_result->get_calories() << endl;
+    // cout << "\tcarbs: " << ing_result->get_carbs() << endl;
+    // cout << "\tfat: " << ing_result->get_fat() << endl;
+    // cout << "\tprotein: " << ing_result->get_protein() << endl;
     
   }
 

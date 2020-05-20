@@ -4,32 +4,10 @@ IngredientResult::IngredientResult(string json_result_string) {
   body = json_result_string;
   ID = INVALID_INT;
   ingredient_name = INVALID_STRING;
-  calories = INVALID_DOUBLE;
-  carbs_grams = INVALID_INT;
-  fat_grams = INVALID_INT;
-  protein_grams = INVALID_INT;
-
-  // Parse the JSON file string for us.
-  rapidjson::Document doc;
-  doc.Parse(json_result_string.c_str());
-
-  // Populate the nutrients map from our array of nutrients.
-  JSONFuncs::check_doc_member_array(doc, "foodNutrients");
-  const rapidjson::Value& foodNutrients = doc["foodNutrients"];
-  
-  // for (rapidjson::Value::ValueIterator itr = foodNutrients.Begin(); itr != foodNutrients.End(); 
-  //   ++itr) {
-
-  // }
-  
-  // for (auto& v : foodNutrients.GetArray()) {
-    // Verify all of the nutrients are complete.
-  //   JSONFuncs::check_doc_member_object(v, "nutrient");
-  //   JSONFuncs::check_doc_member_string(v["nutrient"], "name");
-
-  //   // Store the nutrient in our map.
-  //   nutrients[v["nutrient"]["name"].GetString()] = Nutrient(v);
-  // }
+  // calories = INVALID_DOUBLE;
+  // carbs_grams = INVALID_INT;
+  // fat_grams = INVALID_INT;
+  // protein_grams = INVALID_INT;
 }
 
 IngredientResult::~IngredientResult() {}
@@ -46,22 +24,17 @@ int IngredientResult::get_ID() { return ID; }
 //! Returns the name of the ingredient
 string IngredientResult::get_ingredient_name() { return ingredient_name; }
 
-//! Returns the calories of the ingredient per serving size
-double IngredientResult::get_calories() { return calories; }
+//! Returns the serving size
+double IngredientResult::get_serving_size() { return serving_size; }
 
-//! Returns the grams of carbs of the ingredient per serving size
-int IngredientResult::get_carbs() { return carbs_grams; }
-
-//! Returns the grams of fat of the ingredient per serving size
-int IngredientResult::get_fat() { return fat_grams; }
-
-//! Returns the grams of protein of the ingredient per serving size
-int IngredientResult::get_protein() { return protein_grams; }
+//! Returns the serving size unit
+string IngredientResult::get_serving_size_unit() { return serving_size_unit; }
 
 //! Parses `body` and stores parsed results as private members of this class 
 void IngredientResult::parse_body() {
-  string temp_str;
+  string nut_name;
   rapidjson::Document doc;
+  Nutrient* nut;
 
   // Parse the JSON string into a DOM tree.
   rapidjson::ParseResult parse_ok = doc.Parse(body.c_str());
@@ -72,26 +45,32 @@ void IngredientResult::parse_body() {
   catch (exception& e) {
     JSONFuncs::catch_fatal_exception(e);
   }
+  
+  // Populate the nutrients map from our array of nutrients.
+  JSONFuncs::check_doc_member_array(doc, "foodNutrients");
+  rapidjson::Value& foodNutrients = doc["foodNutrients"];
+  for (rapidjson::Value& v : foodNutrients.GetArray()) {
+    JSONFuncs::check_doc_member_object(v, "nutrient");
+    JSONFuncs::check_doc_member_string(v["nutrient"], "name");
+    nut_name = v["nutrient"]["name"].GetString();
+    nut = new Nutrient(v);
+    nutrients[nut_name] = nut;
+  }
 
   // Store the ingredient ID.
-  JSONFuncs::check_doc_member_int(doc, "id");
-  ID = doc["id"].GetInt();
+  JSONFuncs::check_doc_member_int(doc, "fdcId");
+  ID = doc["fdcId"].GetInt();
 
   // Store the ingredient name.
-  JSONFuncs::check_doc_member_string(doc, "title");
-  ingredient_name = doc["title"].GetString();
+  JSONFuncs::check_doc_member_string(doc, "description");
+  ingredient_name = doc["description"].GetString();
 
-  // Store the macro information.
-  JSONFuncs::check_doc_member_object(doc, "nutrition");
-  const rapidjson::Value& nutrition = doc["nutrition"];
-  JSONFuncs::check_doc_member_number(nutrition, "calories");
-  calories = nutrition["calories"].GetDouble();
-  JSONFuncs::check_doc_member_string(nutrition, "carbs");
-  carbs_grams = get_macro_gram_amount(nutrition["carbs"].GetString());
-  JSONFuncs::check_doc_member_string(nutrition, "fat");
-  fat_grams = get_macro_gram_amount(nutrition["fat"].GetString());
-  JSONFuncs::check_doc_member_string(nutrition, "protein");
-  protein_grams = get_macro_gram_amount(nutrition["protein"].GetString());
+  // Store the serving size and unit.
+  JSONFuncs::check_doc_member_number(doc, "servingSize");
+  serving_size = doc["servingSize"].GetDouble();
+
+  JSONFuncs::check_doc_member_string(doc, "servingSizeUnit");
+  serving_size_unit = doc["servingSizeUnit"].GetString();
 }
 
 //! Gets the macro gram amount from the macro's string

@@ -28,12 +28,16 @@ public:
   string get_body();
   int get_ID();
   string get_ingredient_name();
-  double get_calories();
-  int get_carbs();
-  int get_fat();
-  int get_protein();
+  // double get_calories();
+  // int get_carbs();
+  // int get_fat();
+  // int get_protein();
+  double get_serving_size();
+  string get_serving_size_unit();
 
   void parse_body();
+
+  map<string, Nutrient*> nutrients;
 
 private:
   string body;
@@ -43,9 +47,6 @@ private:
   // Ingredient information.
   int ID;
   string ingredient_name;
-  map<string, Nutrient> nutrients;
-  double calories;
-  int carbs_grams;
-  int fat_grams;
-  int protein_grams;
+  double serving_size;
+  string serving_size_unit;
 };
