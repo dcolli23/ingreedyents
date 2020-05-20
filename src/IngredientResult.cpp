@@ -45,7 +45,7 @@ void IngredientResult::parse_body() {
   catch (exception& e) {
     JSONFuncs::catch_fatal_exception(e);
   }
-  
+
   // Populate the nutrients map from our array of nutrients.
   JSONFuncs::check_doc_member_array(doc, "foodNutrients");
   rapidjson::Value& foodNutrients = doc["foodNutrients"];

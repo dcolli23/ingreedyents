@@ -6,8 +6,8 @@
 using namespace std;
 
 const string UPC_FORMATTER = "{UPC}";
-const string BASE_URL = "https://api.spoonacular.com/food/products/upc/" + UPC_FORMATTER
-  + "?";
+const string FDC_ID_BASE_URL = "https://api.nal.usda.gov/fdc/v1/foods/search?query=" + UPC_FORMATTER;
+const string DETAILED_NUTRITION_BASE_URL = "https://api.nal.usda.gov/fdc/v1/food/";
 
 class IngredientRequest {
 public:
@@ -16,15 +16,19 @@ public:
 
   IngredientResult* make_request();
 
-  string get_URL();
+  string get_FDC_ID_URL();
+  string get_detailed_nutrition_URL();
 
-  void form_URL();
+  void form_FDC_ID_URL();
+  void form_detailed_nutrition_URL();
   
 
 private:
   string API_key;
   string UPC;
-  string URL;
+  string FDC_ID_URL;
+  string FDC_ID;
+  string detailed_nutrition_URL;
   IngredientResult* result;
   HTTPSGETter* getter;
 };

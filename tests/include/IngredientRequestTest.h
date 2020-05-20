@@ -18,11 +18,18 @@ class IngredientRequestTest : public testing::Test {
     };
 };
 
-TEST_F(IngredientRequestTest, FormURLTest) {
-  my_request->form_URL();
-  string URL_test = my_request->get_URL();
-  string URL_truth = "https://api.spoonacular.com/food/products/upc/" + UPC 
-    + "?apiKey=XXX";
+TEST_F(IngredientRequestTest, FormFDCIDURLTest) {
+  my_request->form_FDC_ID_URL();
+  string URL_test = my_request->get_FDC_ID_URL();
+  string URL_truth = "https://api.nal.usda.gov/fdc/v1/foods/search?query=" + UPC 
+    + "&apiKey=XXX";
   
+  EXPECT_EQ(URL_test, URL_truth) << "URL did not form correctly!";
+}
+
+TEST_F(IngredientRequestTest, FormDetailedNutritionURLTest) {
+  my_request->form_detailed_nutrition_URL();
+  string URL_test = my_request->get_detailed_nutrition_URL();
+  string URL_truth = "https://api.nal.usda.gov/fdc/v1/food/?apiKey=XXX";
   EXPECT_EQ(URL_test, URL_truth) << "URL did not form correctly!";
 }
