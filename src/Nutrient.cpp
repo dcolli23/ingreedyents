@@ -1,20 +1,16 @@
 #include "Nutrient.h"
 
 //! Constructor
-Nutrient::Nutrient(rapidjson::Value& val) {
+Nutrient::Nutrient(const rapidjson::Value& val) {
   JSONFuncs::check_doc_member_object(val, "nutrient");
-  const rapidjson::Value& nutrient_val = val["nutrient"].GetObject();
-
-  JSONFuncs::check_doc_member_string(nutrient_val, "name");
-  name = nutrient_val["name"].GetString();
+  JSONFuncs::check_doc_member_string(val["nutrient"], "name");
+  name = val["nutrient"]["name"].GetString();
 
   JSONFuncs::check_doc_member_number(val, "amount");
   amount = val["amount"].GetDouble();
 
-  JSONFuncs::check_doc_member_string(nutrient_val, "unitName");
-  unit = nutrient_val["unitName"].GetString();
-
-  
+  JSONFuncs::check_doc_member_string(val["nutrient"], "unitName");
+  unit = val["nutrient"]["unitName"].GetString();
 }
 
 //! Destructor

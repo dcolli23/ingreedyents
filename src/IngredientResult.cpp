@@ -52,9 +52,7 @@ void IngredientResult::parse_body() {
   for (rapidjson::Value& v : foodNutrients.GetArray()) {
     JSONFuncs::check_doc_member_object(v, "nutrient");
     JSONFuncs::check_doc_member_string(v["nutrient"], "name");
-    nut_name = v["nutrient"]["name"].GetString();
-    nut = new Nutrient(v);
-    nutrients[nut_name] = nut;
+    nutrients[v["nutrient"]["name"].GetString()] = new Nutrient(v);
   }
 
   // Store the ingredient ID.

@@ -8,7 +8,7 @@ using namespace std;
 
 class Nutrient {
 public:
-  Nutrient(rapidjson::Value& val);
+  Nutrient(const rapidjson::Value& val);
   ~Nutrient();
 
   string get_name();
