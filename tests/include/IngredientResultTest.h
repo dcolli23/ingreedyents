@@ -52,27 +52,172 @@ TEST_F(IngredientResultTest, TestServingSizeParse) {
   EXPECT_EQ(mes_test.unit, mes_truth.unit);
 }
 
-// TEST_F(IngredientResultTest, TestCalorieParse) {
-//   double calorie_truth = 30.0;
-//   EXPECT_EQ(my_result->get_calories(), calorie_truth);
-// }
+TEST_F(IngredientResultTest, TestCalcium) {
+  double amount_truth = 95.0;
+  string unit_truth = "mg";
 
-// TEST_F(IngredientResultTest, TestCarbParse) {
-//   int carb_truth = 8;
-//   EXPECT_EQ(my_result->get_carbs(), carb_truth);
-// }
+  Measurement serving_test = my_result->nutrients["Calcium, Ca"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
 
-// TEST_F(IngredientResultTest, TestFatParse) {
-//   int fat_truth = 0;
-//   EXPECT_EQ(my_result->get_fat(), fat_truth);
-// }
+TEST_F(IngredientResultTest, TestIron) {
+  double amount_truth = 0.860;
+  string unit_truth = "mg";
 
-// TEST_F(IngredientResultTest, TestProteinParse) {
-//   int protein_truth = 0;
-//   EXPECT_EQ(my_result->get_protein(), protein_truth);
-// }
+  Measurement serving_test = my_result->nutrients["Iron, Fe"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
 
-// TEST_F(IngredientResultTest, TestCalcium) {
-//   float calcium_truth = 95.0;
-//   // EXPECT_EQ(my_result->nutrients["Calcium, Ca"], calcium_truth);
-// }
+TEST_F(IngredientResultTest, TestVitaminA) {
+  double amount_truth = 238.0;
+  string unit_truth = "IU";
+
+  Measurement serving_test = my_result->nutrients["Vitamin A, IU"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestVitaminC) {
+  double amount_truth = 2.90;
+  string unit_truth = "mg";
+
+  Measurement serving_test = my_result->nutrients["Vitamin C, total ascorbic acid"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestThiamin) {
+  double amount_truth = 0E-8;
+  string unit_truth = "mg";
+
+  Measurement serving_test = my_result->nutrients["Thiamin"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestRiboflavin) {
+  double amount_truth = 0.0810;
+  string unit_truth = "mg";
+
+  Measurement serving_test = my_result->nutrients["Riboflavin"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestNiacin) {
+  double amount_truth = 2.8570;
+  string unit_truth = "mg";
+
+  Measurement serving_test = my_result->nutrients["Niacin"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestProtein) {
+  double amount_truth = 9.520;
+  string unit_truth = "g";
+
+  Measurement serving_test = my_result->nutrients["Protein"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestFat) {
+  double amount_truth = 26.190;
+  string unit_truth = "g";
+
+  Measurement serving_test = my_result->nutrients["Total lipid (fat)"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestCarbs) {
+  double amount_truth = 61.90;
+  string unit_truth = "g";
+
+  Measurement serving_test = my_result->nutrients["Carbohydrate, by difference"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestEnergy) {
+  double amount_truth = 524.0;
+  string unit_truth = "kcal";
+
+  Measurement serving_test = my_result->nutrients["Energy"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestSugars) {
+  double amount_truth = 52.380;
+  string unit_truth = "g";
+
+  Measurement serving_test = my_result->nutrients["Sugars, total including NLEA"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestFiber) {
+  double amount_truth = 2.40;
+  string unit_truth = "g";
+
+  Measurement serving_test = my_result->nutrients["Fiber, total dietary"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestSodium) {
+  double amount_truth = 48.0;
+  string unit_truth = "mg";
+
+  Measurement serving_test = my_result->nutrients["Sodium, Na"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestCholesterol) {
+  double amount_truth = 12.0;
+  string unit_truth = "mg";
+
+  Measurement serving_test = my_result->nutrients["Cholesterol"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestFattyAcidsTrans) {
+  double amount_truth = 0E-8;
+  string unit_truth = "g";
+
+  Measurement serving_test = my_result->nutrients["Fatty acids, total trans"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
+
+TEST_F(IngredientResultTest, TestFattyAcidsSaturated) {
+  double amount_truth = 10.710;
+  string unit_truth = "g";
+
+  Measurement serving_test = my_result->nutrients["Fatty acids, total saturated"]->get_serving();
+  
+  EXPECT_EQ(amount_truth, serving_test.amount);
+  EXPECT_EQ(unit_truth, serving_test.unit);
+}
