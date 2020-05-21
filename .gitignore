@@ -37,3 +37,6 @@ build/
 # Generated Jekyll files
 docs/_site
 docs/Gemfile.lock
+
+# VS Code settings that are different between machines.
+.vscode
