@@ -26,10 +26,7 @@ int IngredientResult::get_ID() { return ID; }
 string IngredientResult::get_ingredient_name() { return ingredient_name; }
 
 //! Returns the serving size
-double IngredientResult::get_serving_size() { return serving_size; }
-
-//! Returns the serving size unit
-string IngredientResult::get_serving_size_unit() { return serving_size_unit; }
+Measurement IngredientResult::get_serving_size() { return serving_size; }
 
 //! Parses `body` and stores parsed results as private members of this class 
 void IngredientResult::parse_body() {
@@ -66,10 +63,10 @@ void IngredientResult::parse_body() {
 
   // Store the serving size and unit.
   JSONFuncs::check_doc_member_number(doc, "servingSize");
-  serving_size = doc["servingSize"].GetDouble();
+  serving_size.amount = doc["servingSize"].GetDouble();
 
   JSONFuncs::check_doc_member_string(doc, "servingSizeUnit");
-  serving_size_unit = doc["servingSizeUnit"].GetString();
+  serving_size.unit = doc["servingSizeUnit"].GetString();
 }
 
 //! Gets the macro gram amount from the macro's string

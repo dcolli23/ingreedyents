@@ -60,8 +60,12 @@ IngredientResult* IngredientRequest::make_request() {
 
   // Ensure that we only got one search result for this UPC lookup and grab that result.
   JSONFuncs::check_doc_member_int(doc, "totalHits");
-  if (doc["totalHits"].GetInt() != 1) {
+  if (doc["totalHits"].GetInt() > 1) {
     cout << "More than one search result for your UPC!!" << endl;
+    exit(1);
+  }
+  else if (doc["totalHits"].GetInt() == 0) {
+    cout << "No results for that UPC!!" << endl;
     exit(1);
   }
   JSONFuncs::check_doc_member_array(doc, "foods");

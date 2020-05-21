@@ -1,7 +1,9 @@
 #include "Nutrient.h"
+#include "JSONFuncs.h"
+#include "Measurement.h"
+
 #include "gtest/gtest.h"
 
-#include "JSONFuncs.h"
 
 #include <fstream>
 
@@ -29,12 +31,12 @@ TEST_F(NutrientTest, InitializationTest) {
   string name_truth = "Calcium, Ca";
   double amount_truth = 95.00000000;
   string unit_truth = "mg";
+  Measurement serving_test;
 
   string name_test = my_nutrient->get_name();
-  double amount_test = my_nutrient->get_amount();
-  string unit_test = my_nutrient->get_unit();
+  serving_test = my_nutrient->get_serving();
 
   EXPECT_EQ(name_test, name_truth);
-  EXPECT_EQ(amount_test, amount_truth);
-  EXPECT_EQ(unit_test, unit_truth);
+  EXPECT_EQ(serving_test.amount, amount_truth);
+  EXPECT_EQ(serving_test.unit, unit_truth);
 }

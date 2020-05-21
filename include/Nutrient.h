@@ -1,5 +1,6 @@
 #pragma once
 #include "JSONFuncs.h"
+#include "Measurement.h"
 
 #include <rapidjson/document.h>
 
@@ -12,11 +13,9 @@ public:
   ~Nutrient();
 
   string get_name();
-  double get_amount();
-  string get_unit();
+  Measurement get_serving();
 
 private:
   string name;
-  double amount;
-  string unit;
+  Measurement serving;
 };

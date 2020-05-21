@@ -1,6 +1,7 @@
 #include "UPC_CLI.h"
 #include "IngredientRequest.h"
 #include "IngredientResult.h"
+#include "Measurement.h"
 
 //! Constructor
 UPC_CLI::UPC_CLI() {
@@ -17,6 +18,7 @@ void UPC_CLI::start_CLI() {
   string user_response;
   IngredientRequest* user_request;
   IngredientResult* ing_result;
+  Measurement serving;
 
   // Ask for the API key.
   // cout << "Please enter your unique spoonacular API key: ";
@@ -40,7 +42,8 @@ void UPC_CLI::start_CLI() {
 
     cout << "\tIngredient name: " << ing_result->get_ingredient_name() << endl;
     for (auto const& [key, value] : ing_result->nutrients){
-      cout << "\t\t" << key << ": " << value->get_amount() << value->get_unit() << endl;
+      serving = value->get_serving();
+      cout << "\t\t" << key << ": " << serving.amount << ' ' << serving.unit << endl;
     }
   }
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "JSONFuncs.h"
 #include "Nutrient.h"
+#include "Measurement.h"
 
 #include "rapidjson/document.h"
 
@@ -32,8 +33,7 @@ public:
   // int get_carbs();
   // int get_fat();
   // int get_protein();
-  double get_serving_size();
-  string get_serving_size_unit();
+  Measurement get_serving_size();
 
   void parse_body();
 
@@ -47,6 +47,5 @@ private:
   // Ingredient information.
   int ID;
   string ingredient_name;
-  double serving_size;
-  string serving_size_unit;
+  Measurement serving_size;
 };

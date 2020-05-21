@@ -7,10 +7,10 @@ Nutrient::Nutrient(const rapidjson::Value& val) {
   name = val["nutrient"]["name"].GetString();
 
   JSONFuncs::check_doc_member_number(val, "amount");
-  amount = val["amount"].GetDouble();
+  serving.amount = val["amount"].GetDouble();
 
   JSONFuncs::check_doc_member_string(val["nutrient"], "unitName");
-  unit = val["nutrient"]["unitName"].GetString();
+  serving.unit = val["nutrient"]["unitName"].GetString();
 }
 
 //! Destructor
@@ -19,8 +19,5 @@ Nutrient::~Nutrient() {}
 //! Returns the name of the nutrient
 string Nutrient::get_name() { return name; }
 
-//! Returns the amount of the nutrient per serving
-double Nutrient::get_amount() { return amount; }
-
-//! Returns the unit of the nutrient amount per serving
-string Nutrient::get_unit() { return unit; }
+//! Returns the serving size of this Nutrient
+Measurement Nutrient::get_serving() { return serving; }

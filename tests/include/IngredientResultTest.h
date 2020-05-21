@@ -1,6 +1,7 @@
 #pragma once
 #include "gtest/gtest.h"
 #include "IngredientResult.h"
+#include "Measurement.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -41,13 +42,14 @@ TEST_F(IngredientResultTest, TestNameParse) {
 }
 
 TEST_F(IngredientResultTest, TestServingSizeParse) {
-  double size_truth = 42.0;
-  EXPECT_EQ(my_result->get_serving_size(), size_truth);
-}
+  struct Measurement mes_truth;
+  mes_truth.amount = 42.0;
+  mes_truth.unit = "g";
 
-TEST_F(IngredientResultTest, TestServingSizeUnitParse) {
-  string unit_truth = "g";
-  EXPECT_EQ(my_result->get_serving_size_unit(), unit_truth);
+  Measurement mes_test = my_result->get_serving_size();
+
+  EXPECT_EQ(mes_test.amount, mes_truth.amount);
+  EXPECT_EQ(mes_test.unit, mes_truth.unit);
 }
 
 // TEST_F(IngredientResultTest, TestCalorieParse) {
