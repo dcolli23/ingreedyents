@@ -40,3 +40,22 @@ TEST_F(NutrientTest, InitializationTest) {
   EXPECT_EQ(serving_test.get_amount(), amount_truth);
   EXPECT_EQ(serving_test.get_unit(), unit_truth);
 }
+
+TEST_F(NutrientTest, SetServingTest) {
+  double additional_amount = 10.0;
+  double amount_truth = 105.0;
+  string unit = "mg";
+  Measurement new_mes;
+  new_mes.set_amount(additional_amount);
+  new_mes.set_unit(unit);
+
+  Measurement prev_mes = my_nutrient->get_serving();
+  my_nutrient->set_serving(prev_mes + new_mes);
+
+  EXPECT_EQ(amount_truth, my_nutrient->get_serving().get_amount());
+  EXPECT_EQ(unit, my_nutrient->get_serving().get_unit());
+}
+
+TEST_F(NutrientTest, SetNameTest) {
+
+}

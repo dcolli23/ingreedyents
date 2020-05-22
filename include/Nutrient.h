@@ -15,6 +15,8 @@ public:
   string get_name();
   Measurement get_serving();
 
+  void set_serving(Measurement);
+
 private:
   string name;
   Measurement serving;

@@ -21,3 +21,6 @@ string Nutrient::get_name() { return name; }
 
 //! Returns the serving size of this Nutrient
 Measurement Nutrient::get_serving() { return serving; }
+
+//! Sets the serving for this Nutrient
+void Nutrient::set_serving(Measurement mes) { serving = mes; }
