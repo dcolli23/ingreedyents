@@ -8,6 +8,7 @@
 #include "NutrientTest.h"
 #include "JSONFuncsTest.h"
 #include "MeasurementTest.h"
+#include "RecipeTest.h"
 
 int main(int argc, char* argv[]) {
   ::testing::InitGoogleTest(&argc, argv);

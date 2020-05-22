@@ -39,6 +39,7 @@ set(SOURCES
     src/IngredientRequest.cpp
     src/UPC_CLI.cpp
     src/Nutrient.cpp
+    src/Recipe.cpp
 )
 set(TESTFILES
     tests/Example_Test.cpp
