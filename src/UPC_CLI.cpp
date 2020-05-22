@@ -43,7 +43,7 @@ void UPC_CLI::start_CLI() {
     cout << "\tIngredient name: " << ing_result->get_ingredient_name() << endl;
     for (auto const& [key, value] : ing_result->nutrients){
       serving = value->get_serving();
-      cout << "\t\t" << key << ": " << serving.amount << ' ' << serving.unit << endl;
+      cout << "\t\t" << key << ": " << serving.get_amount() << ' ' << serving.get_unit() << endl;
     }
   }
 

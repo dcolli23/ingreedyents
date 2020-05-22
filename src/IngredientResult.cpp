@@ -63,10 +63,10 @@ void IngredientResult::parse_body() {
 
   // Store the serving size and unit.
   JSONFuncs::check_doc_member_number(doc, "servingSize");
-  serving_size.amount = doc["servingSize"].GetDouble();
+  serving_size.set_amount(doc["servingSize"].GetDouble());
 
   JSONFuncs::check_doc_member_string(doc, "servingSizeUnit");
-  serving_size.unit = doc["servingSizeUnit"].GetString();
+  serving_size.set_unit(doc["servingSizeUnit"].GetString());
 }
 
 //! Gets the macro gram amount from the macro's string

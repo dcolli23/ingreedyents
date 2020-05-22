@@ -7,10 +7,10 @@ Nutrient::Nutrient(const rapidjson::Value& val) {
   name = val["nutrient"]["name"].GetString();
 
   JSONFuncs::check_doc_member_number(val, "amount");
-  serving.amount = val["amount"].GetDouble();
+  serving.set_amount(val["amount"].GetDouble());
 
   JSONFuncs::check_doc_member_string(val["nutrient"], "unitName");
-  serving.unit = val["nutrient"]["unitName"].GetString();
+  serving.set_unit(val["nutrient"]["unitName"].GetString());
 }
 
 //! Destructor

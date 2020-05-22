@@ -37,6 +37,6 @@ TEST_F(NutrientTest, InitializationTest) {
   serving_test = my_nutrient->get_serving();
 
   EXPECT_EQ(name_test, name_truth);
-  EXPECT_EQ(serving_test.amount, amount_truth);
-  EXPECT_EQ(serving_test.unit, unit_truth);
+  EXPECT_EQ(serving_test.get_amount(), amount_truth);
+  EXPECT_EQ(serving_test.get_unit(), unit_truth);
 }

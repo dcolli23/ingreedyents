@@ -40,6 +40,7 @@ set(SOURCES
     src/UPC_CLI.cpp
     src/Nutrient.cpp
     src/Recipe.cpp
+    src/Measurement.cpp
 )
 set(TESTFILES
     tests/Example_Test.cpp

@@ -57,13 +57,13 @@ void Recipe::add_ingredient(IngredientResult* ing, Measurement serv) {
   }
   else {
     // The ingredient already exists and we just need to tally up the extra amount.
-    Measurement& existing_serv = ingredient_amounts[ingID];
-    if (existing_serv.unit == serv.unit)
-      existing_serv.amount += serv.amount;
-    else {
+    // Measurement& existing_serv = ingredient_amounts[ingID];
+    // if (existing_serv.unit == serv.unit)
+    //   existing_serv.amount += serv.amount;
+    // else {
       cout << "We don't support unit conversions yet!";
       exit(1);
-    }
+    // }
   }
 
   // Tally the nutrition information for this ingredient.
