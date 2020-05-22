@@ -55,6 +55,17 @@ TEST(MeasurementTest, SubtractOperatorTest) {
   EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
 }
 
+// TEST(MeasurementTest, SubtractOperatorTestFail) {
+//   Measurement res_test, m1, m2;
+
+//   m1.set_amount(15.0);
+//   m1.set_unit("g");
+//   m2.set_amount(12.0);
+//   m2.set_unit("g");
+
+//   EXPECT_DEATH(res_test = m1 - m2);
+// }
+
 TEST(MeasurementTest, MultiplyOperatorTest) {
   Measurement res_truth;
   Measurement res_test, m1;
@@ -86,3 +97,50 @@ TEST(MeasurementTest, DivideOperatorTest) {
   EXPECT_EQ(res_test.get_amount(), res_truth.get_amount());
   EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
 }
+
+TEST(MeasurementTest, PlusEqualsOperatorTest) {
+  Measurement res_truth;
+  Measurement res_test, m2;
+
+  res_truth.set_amount(70.0);
+  res_truth.set_unit("kg");
+
+  res_test.set_amount(30.0);
+  res_test.set_unit("kg");
+  m2.set_amount(40.0);
+  m2.set_unit("kg");
+
+  res_test += m2;
+
+  EXPECT_EQ(res_test.get_amount(), res_truth.get_amount());
+  EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
+}
+
+TEST(MeasurementTest, MinusEqualsOperatorTest) {
+  Measurement res_truth;
+  Measurement res_test, m2;
+
+  res_truth.set_amount(10.0);
+  res_truth.set_unit("kg");
+
+  res_test.set_amount(40.0);
+  res_test.set_unit("kg");
+  m2.set_amount(30.0);
+  m2.set_unit("kg");
+
+  res_test -= m2;
+
+  EXPECT_EQ(res_test.get_amount(), res_truth.get_amount());
+  EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
+}
+
+// TEST(MeasurementTest, MinusEqualsOperatorTestFail) {
+//   Measurement m1, m2;
+
+//   m1.set_amount(30.0);
+//   m1.set_unit("kg");
+//   m2.set_amount(40.0);
+//   m2.set_unit("kg");
+
+//   EXPECT_DEATH(m1 -= m2);
+// }

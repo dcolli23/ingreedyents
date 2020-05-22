@@ -63,3 +63,30 @@ Measurement Measurement::operator/(double factor) {
   new_mes.unit = unit;
   return new_mes;
 }
+
+Measurement& Measurement::operator+=(Measurement const& mes) {
+  if (unit == mes.unit) {
+    amount += mes.amount;
+  }
+  else {
+    cout << "We don't support unit conversions yet!";
+    exit(1);
+  }
+  return *this;
+}
+
+Measurement& Measurement::operator-=(Measurement const& mes) {
+  if (unit == mes.unit) {
+    amount -= mes.amount;
+  }
+  else {
+    cout << "We don't support unit conversions yet!";
+    exit(1);
+  }
+
+  if (amount < 0.0) {
+    cout << "You can't have a negative measurement!";
+    exit(1);
+  }
+  return *this;
+}
