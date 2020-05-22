@@ -18,7 +18,10 @@ public:
   void set_amount(double);
   void set_unit(string);
 
-  Measurement operator+(Measurement const& mes);
+  Measurement operator+(Measurement const&);
+  Measurement operator-(Measurement const&);
+  Measurement operator*(double);
+  Measurement operator/(double);
 
 private:
   double amount;

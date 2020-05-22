@@ -19,18 +19,70 @@ TEST(MeasurementTest, InitializationTest) {
   EXPECT_EQ(unit_truth, mes_test.get_unit()) << "Unit did not validate!";
 }
 
-// TEST(MeasurementTest, AddOperatorTest) {
+TEST(MeasurementTest, AddOperatorTest) {
+  Measurement res_truth;
+  Measurement res_test, m1, m2;
 
-// }
+  res_truth.set_amount(10.0);
+  res_truth.set_unit("g");
 
-// TEST(MeasurementTest, SubtractOperatorTest) {
+  m1.set_amount(7.0);
+  m1.set_unit("g");
+  m2.set_amount(3.0);
+  m2.set_unit("g");
 
-// }
+  res_test = m1 + m2;
 
-// TEST(MeasurementTest, MultiplyOperatorTest) {
+  EXPECT_EQ(res_test.get_amount(), res_truth.get_amount());
+  EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
+}
 
-// }
+TEST(MeasurementTest, SubtractOperatorTest) {
+  Measurement res_truth;
+  Measurement res_test, m1, m2;
 
-// TEST(MeasurementTest, DivideOperatorTest) {
+  res_truth.set_amount(3.0);
+  res_truth.set_unit("g");
 
-// }
+  m1.set_amount(15.0);
+  m1.set_unit("g");
+  m2.set_amount(12.0);
+  m2.set_unit("g");
+
+  res_test = m1 - m2;
+
+  EXPECT_EQ(res_test.get_amount(), res_truth.get_amount());
+  EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
+}
+
+TEST(MeasurementTest, MultiplyOperatorTest) {
+  Measurement res_truth;
+  Measurement res_test, m1;
+
+  res_truth.set_amount(10.0);
+  res_truth.set_unit("mg");
+
+  m1.set_amount(5.0);
+  m1.set_unit("mg");
+
+  res_test = m1 * 2;
+
+  EXPECT_EQ(res_test.get_amount(), res_truth.get_amount());
+  EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
+}
+
+TEST(MeasurementTest, DivideOperatorTest) {
+  Measurement res_truth;
+  Measurement res_test, m1;
+
+  res_truth.set_amount(10.0);
+  res_truth.set_unit("kg");
+
+  m1.set_amount(30.0);
+  m1.set_unit("kg");
+
+  res_test = m1 / 3.0;
+
+  EXPECT_EQ(res_test.get_amount(), res_truth.get_amount());
+  EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
+}
