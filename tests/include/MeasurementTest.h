@@ -1,6 +1,12 @@
 #include "Measurement.h"
 #include "gtest/gtest.h"
 
+TEST(MeasurementTest, InitializationEmptyTest) {
+  struct Measurement mes_test;
+  EXPECT_EQ(mes_test.amount, 0.0);
+  EXPECT_EQ(mes_test.unit, "");
+}
+
 TEST(MeasurementTest, InitializationTest) {
   double amount_truth = 100.0;
   string unit_truth = "g";

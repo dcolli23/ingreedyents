@@ -3,6 +3,6 @@
 using namespace std;
 
 struct Measurement {
-  double amount;
-  string unit;
+  double amount = 0.0;
+  string unit = "";
 };
