@@ -7,6 +7,7 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <map>
 using namespace std;
 
@@ -22,6 +23,7 @@ const double INVALID_DOUBLE = -1.0;
 class IngredientResult {
 public:
   IngredientResult(string json_result_string);
+  IngredientResult(ifstream&);
   ~IngredientResult();
 
   void set_body(string body);

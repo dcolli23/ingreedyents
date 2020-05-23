@@ -57,26 +57,57 @@ void Recipe::add_ingredient(IngredientResult* ing, Measurement serv) {
   }
   else {
     // The ingredient already exists and we just need to tally up the extra amount.
-    // Measurement& existing_serv = ingredient_amounts[ingID];
-    // if (existing_serv.unit == serv.unit)
-    //   existing_serv.amount += serv.amount;
-    // else {
-      cout << "We don't support unit conversions yet!";
-      exit(1);
-    // }
+    ingredient_amounts[ingID] += serv;
   }
 
   // Tally the nutrition information for this ingredient.
-  // for (auto const& [nutID, nut] : ing->nutrients) {
-  //   if (nutrition_info.find(nutID) == nutrition_info.end()) {
-  //     // The nutrient is new and we can directly add the nutrient.
-  //     nutrition_info[nutID] = nut;
-  //   }
-  //   else {
-  //     // Otherwise, we have to tally the nutrient amount to our existing amount.
-  //     nutrition_info[nutID]->add_measurement_to_serving(serv);
-  //   }
-  // }
+  for (auto const& [nutID, nut] : ing->nutrients) {
+    if (nutrition_info.find(nutID) == nutrition_info.end()) {
+      // The nutrient is new and we can directly add the nutrient.
+      nutrition_info[nutID] = nut;
+    }
+    else {
+      // Otherwise, we have to tally the nutrient amount to our existing amount.
+      // nutrition_info[nutID]->set_serving(nutrition_info[nutID]->get_serving() + serv * nut->get_serving());
+      cout << "Nutrition tallying isn't implemented yet!";
+    }
+  }
+}
+
+//! Subtract given amount from ingredient with given ID
+void Recipe::subtract_ingredient(int ingID, Measurement serv) {
+  // Make sure the ingredient exists in our list.
+  map<int, IngredientResult*>::iterator ingIt = ingredients.find(ingID);
+  if (ingIt != ingredients.end()) {
+    // It's in our ingredient list.
+    map<int, Measurement>::iterator ingAmountIt = ingredient_amounts.find(ingID);
+    double new_amount = ingAmountIt->second.get_amount() - serv.get_amount();
+    
+    // Remove the ingredient if it is less than or equal to zero.
+    if (new_amount <= 0.0) {
+      remove_ingredient(ingID);
+    }
+    else {
+      ingAmountIt->second.set_amount(new_amount);
+    }
+  }
+  else {
+    // It's not in our list.
+    cout << "That ingredient is somehow not in your list of ingredients for this recipe!" << endl;
+  }
 }
 
 //! Remove an ingredient from the recipe
+void Recipe::remove_ingredient(int ingID) {
+  // Make sure the ingredient exists in our list.
+  map<int, IngredientResult*>::iterator ingIt = ingredients.find(ingID);
+  if (ingIt != ingredients.end()) {
+    // It's in our ingredient list.
+    ingredients.erase(ingIt);
+    ingredient_amounts.erase(ingID);
+  }
+  else {
+    // It's not in our ingredient list.
+    cout << "That ingredient is somehow not in your list of ingredients to remove!" << endl;
+  }
+}

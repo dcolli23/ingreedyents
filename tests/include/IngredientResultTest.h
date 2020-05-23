@@ -15,18 +15,14 @@ class IngredientResultTest : public testing::Test {
     // Set up the IngredientResult during each test.
     void SetUp() override {
       // Read in the JSON result file as a string.
-      std::ifstream fin(JSON_RESULT_LOCATION);
-      std::string json_str;
-      
-      fin.seekg(0, std::ios::end);
-      json_str.reserve(fin.tellg());
-      fin.seekg(0, std::ios::beg);
+      std::ifstream fin;
 
-      json_str.assign((std::istreambuf_iterator<char>(fin)), std::istreambuf_iterator<char>());
-      
       // Initialize the new IngredientResult.
-      my_result = new IngredientResult(json_str);
-      my_result->parse_body();      
+      fin.open(JSON_RESULT_LOCATION);
+      if (fin.fail()) {
+        cout << "File failed to open!" << endl;
+      }
+      my_result = new IngredientResult(fin);
     }
     void TearDown() override {}
 };

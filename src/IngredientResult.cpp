@@ -1,16 +1,25 @@
 #include "IngredientResult.h"
 
+//! Constructor
 IngredientResult::IngredientResult(string json_result_string) {
   body = json_result_string;
   ID = INVALID_INT;
   ingredient_name = INVALID_STRING;
-  // calories = INVALID_DOUBLE;
-  // carbs_grams = INVALID_INT;
-  // fat_grams = INVALID_INT;
-  // protein_grams = INVALID_INT;
   parse_body();
 }
 
+//! Constructor
+IngredientResult::IngredientResult(ifstream& fin) {
+  fin.seekg(0, ios::end);
+  body.reserve(fin.tellg());
+  fin.seekg(0, ios::beg);
+  body.assign((istreambuf_iterator<char>(fin)), istreambuf_iterator<char>());
+  ID = INVALID_INT;
+  ingredient_name = INVALID_STRING;
+  parse_body();
+}
+
+//! Desctructor
 IngredientResult::~IngredientResult() {}
 
 //! Sets the body of the HTTPS GET request result

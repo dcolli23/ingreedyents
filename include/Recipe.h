@@ -26,7 +26,8 @@ public:
   string get_instructions();
 
   void add_ingredient(IngredientResult*, Measurement);
-  void remove_ingredient(string);
+  void subtract_ingredient(int, Measurement);
+  void remove_ingredient(int);
 
   map<int, IngredientResult*> ingredients;
   map<int, Measurement> ingredient_amounts;

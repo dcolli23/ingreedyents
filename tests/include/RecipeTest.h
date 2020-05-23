@@ -2,6 +2,12 @@
 #include "Measurement.h"
 #include "gtest/gtest.h"
 
+#include <string>
+using namespace std;
+
+const string MM_ING_FILEPATH = "../tests/data/ingredient_nutrition_get_result.json";
+const string MARSH_ING_FILEPATH = "../tests/data/marshmellow_fluff_ingredient.json";
+
 class RecipeTest : public testing::Test {
   protected:
     Recipe* my_recipe;
@@ -12,6 +18,31 @@ class RecipeTest : public testing::Test {
 
     void TearDown() override {
       delete my_recipe;
+    }
+};
+
+class RecipeWithMultipleIngredients : public testing::Test {
+  protected:
+    Recipe* my_recipe;
+    IngredientResult *mmIng, *marshIng;
+
+    void SetUp() override {
+      my_recipe = new Recipe();
+
+      ifstream mmFin(MM_ING_FILEPATH);
+      ifstream marshFin(MARSH_ING_FILEPATH);
+
+      if (mmFin.fail() || marshFin.fail()) {
+        cout << "File failed to open!" << endl;
+      }
+      mmIng = new IngredientResult(mmFin);
+      marshIng = new IngredientResult(marshFin);
+    }
+
+    void TearDown() override {
+      delete my_recipe;
+      delete mmIng;
+      delete marshIng;
     }
 };
 
@@ -29,3 +60,23 @@ TEST_F(RecipeTest, InitializationTest) {
   EXPECT_EQ(my_recipe->get_rating(), -1);
   EXPECT_EQ(my_recipe->get_instructions(), "");
 }
+
+TEST_F(RecipeWithMultipleIngredients, AddIngredientTest) {
+  
+}
+
+// TEST_F(RecipeTest, AddMultipleIngredientTest) {
+
+// }
+
+// TEST_F(RecipeTest, SubtractIngredientTest) {
+
+// }
+
+// TEST_F(RecipeTest, RemoveIngredientThroughSubtractionTest) {
+
+// }
+
+// TEST_F(RecipeTest, RemoveIngredientTest) {
+
+// }
