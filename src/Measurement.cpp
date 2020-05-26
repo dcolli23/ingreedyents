@@ -6,6 +6,12 @@ Measurement::Measurement() {
   unit = "";
 }
 
+//! Constructor
+Measurement::Measurement(double amt, string unt) {
+  amount = amt;
+  unit = unt;
+}
+
 //! Returns the amount in the measurement
 double Measurement::get_amount() { return amount; }
 

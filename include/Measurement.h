@@ -7,6 +7,7 @@ using namespace std;
 class Measurement {
 public:
   Measurement();
+  Measurement(double, string);
 
   // Gets
 
