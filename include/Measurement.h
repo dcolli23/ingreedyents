@@ -21,6 +21,7 @@ public:
 
   Measurement operator+(Measurement const&);
   Measurement operator-(Measurement const&);
+  double operator/(Measurement const&);
   Measurement operator*(double);
   Measurement operator/(double);
   Measurement& operator+=(Measurement const&);

@@ -56,6 +56,18 @@ Measurement Measurement::operator-(Measurement const& mes) {
   return new_mes;
 }
 
+double Measurement::operator/(Measurement const& mes) {
+  double num_servings;
+  if (unit == mes.unit) {
+    num_servings = amount / mes.amount;
+  }
+  else {
+    cout << "We don't support unit conversions yet!" << endl;
+    exit(1);
+  }
+  return num_servings;
+}
+
 Measurement Measurement::operator*(double factor) {
   Measurement new_mes;
   new_mes.amount = amount * factor;

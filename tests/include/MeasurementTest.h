@@ -65,6 +65,19 @@ TEST(MeasurementTest, SubtractOperatorTest) {
   EXPECT_EQ(res_test.get_unit(), res_truth.get_unit());
 }
 
+TEST(MeasurementTest, DivideOperatorMeasurementTest) {
+  double res_truth, res_test;
+  Measurement m1, m2;
+
+  res_truth = 6.0;
+  m1 = Measurement(18.0, "ml");
+  m2 = Measurement(3.0, "ml");
+
+  res_test = m1 / m2;
+
+  EXPECT_EQ(res_test, res_truth);
+}
+
 // TEST(MeasurementTest, SubtractOperatorTestFail) {
 //   Measurement res_test, m1, m2;
 
