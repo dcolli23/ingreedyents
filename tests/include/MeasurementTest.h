@@ -89,7 +89,7 @@ TEST(MeasurementTest, DivideOperatorMeasurementTest) {
 //   EXPECT_DEATH(res_test = m1 - m2);
 // }
 
-TEST(MeasurementTest, MultiplyOperatorTest) {
+TEST(MeasurementTest, MultiplyRHSOperatorTest) {
   Measurement res_truth;
   Measurement res_test, m1;
 
@@ -167,3 +167,14 @@ TEST(MeasurementTest, MinusEqualsOperatorTest) {
 
 //   EXPECT_DEATH(m1 -= m2);
 // }
+
+TEST(MeasurementTest, ComparisonOperator) {
+  Measurement m1, m2;
+  double amt_truth = 13320.0293;
+  string unit_truth = "ml";
+
+  m1 = Measurement(amt_truth, unit_truth);
+  m2 = Measurement(amt_truth, unit_truth);
+
+  EXPECT_TRUE(m1 == m2);
+}

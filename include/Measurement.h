@@ -26,6 +26,7 @@ public:
   Measurement operator/(double);
   Measurement& operator+=(Measurement const&);
   Measurement& operator-=(Measurement const&);
+  bool operator==(Measurement &);
 
 private:
   double amount;

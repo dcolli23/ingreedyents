@@ -108,3 +108,7 @@ Measurement& Measurement::operator-=(Measurement const& mes) {
   }
   return *this;
 }
+
+bool Measurement::operator==(Measurement & mes) {
+  return amount == mes.amount && unit == mes.unit;
+}
