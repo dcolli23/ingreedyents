@@ -147,45 +147,59 @@ TEST_F(RecipeWithMultipleIngredients, SubtractIngredientPartialTest) {
   Measurement carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings
     + marshIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_marsh_servings;
 
-  EXPECT_TRUE(my_recipe->nutrient_amounts["Calcium, Ca"] == calcium_truth);
-  EXPECT_TRUE(my_recipe->nutrient_amounts["Energy"] == energy_truth);
-  EXPECT_TRUE(my_recipe->nutrient_amounts["Protein"] == protein_truth);
-  EXPECT_TRUE(my_recipe->nutrient_amounts["Total lipid (fat)"] == fat_truth);
-  EXPECT_TRUE(my_recipe->nutrient_amounts["Carbohydrate, by difference"] == carb_truth);
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_amount(), calcium_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
+
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Energy"].get_amount(), energy_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
+
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Protein"].get_amount(), protein_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
+
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_amount(), fat_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
+
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_amount(), carb_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
 
   // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
   mmIng = nullptr;
   marshIng = nullptr;
 }
 
-// TEST_F(RecipeWithMultipleIngredients, RemoveIngredientThroughSubtractionTest) {
-//   // Add the ingredients.
-//   my_recipe->add_ingredient(mmIng, mes1);
-//   my_recipe->add_ingredient(marshIng, mes2);
+TEST_F(RecipeWithMultipleIngredients, RemoveIngredientThroughSubtractionTest) {
+  // Add the ingredients.
+  my_recipe->add_ingredient(mmIng, mes1);
+  my_recipe->add_ingredient(marshIng, mes2);
 
-//   my_recipe->subtract_ingredient(marshIng->get_ID(), mes2);
+  my_recipe->subtract_ingredient(marshIng->get_ID(), mes2);
 
-//   // Now check that the nutrients are tallied correctly.
-//   double num_mm_servings = mes1 / mmIng->get_serving_size();  
-//   Measurement calcium_truth = mmIng->nutrients["Calcium, Ca"]->get_serving() * num_mm_servings;
-//   Measurement energy_truth = mmIng->nutrients["Energy"]->get_serving() * num_mm_servings;
-//   Measurement protein_truth = mmIng->nutrients["Protein"]->get_serving() * num_mm_servings;
-//   Measurement fat_truth = mmIng->nutrients["Total lipid (fat)"]->get_serving() * num_mm_servings;  
-//   Measurement carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings;
+  // Now check that the nutrients are tallied correctly.
+  double num_mm_servings = mes1 / mmIng->get_serving_size();  
+  Measurement calcium_truth = mmIng->nutrients["Calcium, Ca"]->get_serving() * num_mm_servings;
+  Measurement energy_truth = mmIng->nutrients["Energy"]->get_serving() * num_mm_servings;
+  Measurement protein_truth = mmIng->nutrients["Protein"]->get_serving() * num_mm_servings;
+  Measurement fat_truth = mmIng->nutrients["Total lipid (fat)"]->get_serving() * num_mm_servings;  
+  Measurement carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings;
 
-//   EXPECT_TRUE(my_recipe->nutrient_amounts["Calcium, Ca"] == calcium_truth);
-//   EXPECT_TRUE(my_recipe->nutrient_amounts["Energy"] == energy_truth);
-//   EXPECT_TRUE(my_recipe->nutrient_amounts["Protein"] == protein_truth);
-//   EXPECT_TRUE(my_recipe->nutrient_amounts["Total lipid (fat)"] == fat_truth);
-//   EXPECT_TRUE(my_recipe->nutrient_amounts["Carbohydrate, by difference"] == carb_truth);
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_amount(), calcium_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
 
-//   // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
-//   mmIng = nullptr;
-// }
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Energy"].get_amount(), energy_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
 
-// TEST_F(RecipeWithMultipleIngredients, RemoveIngredientThroughSubtractionTest) {
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Protein"].get_amount(), protein_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
 
-// }
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_amount(), fat_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
+
+  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_amount(), carb_truth.get_amount());
+  EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
+
+  // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
+  mmIng = nullptr;
+}
 
 // TEST_F(RecipeWithMultipleIngredients, RemoveIngredientTest) {
 

@@ -120,6 +120,20 @@ void Recipe::remove_ingredient(int ingID) {
   map<int, IngredientResult*>::iterator ingIt = ingredients.find(ingID);
   if (ingIt != ingredients.end()) {
     // It's in our ingredient list.
+    
+    // We have to remove the nutrients coming from this ingredient from our recipe.
+    double num_servings_removed = ingredient_amounts[ingID] / ingIt->second->get_serving_size();
+    for (auto const& [nutID, nut] : ingIt->second->nutrients) {
+      nutrient_amounts[nutID] -= nut->get_serving() * num_servings_removed;
+      
+      // Remove the nutrient entirely if there's none left.
+      if (nutrient_amounts[nutID].get_amount() <= 0) {
+        nutrient_amounts.erase(nutID);
+        nutrition_info.erase(nutID);
+      }
+    }
+
+    // Erase the ingredient from our recipe.
     ingredients.erase(ingIt);
     ingredient_amounts.erase(ingID);
   }
