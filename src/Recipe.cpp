@@ -13,8 +13,9 @@ Recipe::Recipe() {
 
 //! Destructor
 Recipe::~Recipe() {
-  for (auto const& [key, value] : ingredients) {
+  for (auto & [key, value] : ingredients) {
     delete value;
+    value = nullptr;
   }
 }
 
@@ -48,6 +49,7 @@ string Recipe::get_instructions() { return instructions; }
 void Recipe::add_ingredient(IngredientResult* ing, Measurement serv) {
   Nutrient* existing_nut;
   int ingID = ing->get_ID();
+  double num_servings = serv / ing->get_serving_size();
 
   // Tally the ingredient and the amount into our ingredients list.
   if (ingredients.find(ingID) == ingredients.end()) {
@@ -65,11 +67,12 @@ void Recipe::add_ingredient(IngredientResult* ing, Measurement serv) {
     if (nutrition_info.find(nutID) == nutrition_info.end()) {
       // The nutrient is new and we can directly add the nutrient.
       nutrition_info[nutID] = nut;
+      nutrient_amounts[nutID] = nut->get_serving() * num_servings;
     }
     else {
       // Otherwise, we have to tally the nutrient amount to our existing amount.
-      // nutrition_info[nutID]->set_serving(nutrition_info[nutID]->get_serving() + serv * nut->get_serving());
-      cout << "Nutrition tallying isn't implemented yet!";
+      nutrient_amounts[nutID] = nutrient_amounts[nutID] 
+        + nut->get_serving() * num_servings;
     }
   }
 }

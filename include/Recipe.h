@@ -31,6 +31,8 @@ public:
 
   map<int, IngredientResult*> ingredients;
   map<int, Measurement> ingredient_amounts;
+  map<string, Nutrient*> nutrition_info;
+  map<string, Measurement> nutrient_amounts;
 
 private:
   struct Measurement serving;
@@ -41,5 +43,4 @@ private:
   time_t date_of_creation;
   int rating;
   string instructions;
-  map<string, Nutrient*> nutrition_info;
 };
