@@ -79,6 +79,9 @@ void Recipe::add_ingredient(IngredientResult* ing, Measurement serv) {
 
 //! Subtract given amount from ingredient with given ID
 void Recipe::subtract_ingredient(int ingID, Measurement serv) {
+  double num_servings_removed;
+  Measurement nutrient_serving_in_ing;
+
   // Make sure the ingredient exists in our list.
   map<int, IngredientResult*>::iterator ingIt = ingredients.find(ingID);
   if (ingIt != ingredients.end()) {
@@ -91,7 +94,18 @@ void Recipe::subtract_ingredient(int ingID, Measurement serv) {
       remove_ingredient(ingID);
     }
     else {
+      // Calculate the number of servings removed for calculating the new amount of nutrients in 
+      // recipe.
+      num_servings_removed = serv / ingredients[ingID]->get_serving_size();
+
+      // Set the new amount of the ingredient in the recipe.
       ingAmountIt->second.set_amount(new_amount);
+
+      // Calculate the remaining nutrients in the recipe.
+      for (auto const& [nutID, nut] : ingIt->second->nutrients) {
+        nutrient_serving_in_ing = ingIt->second->nutrients[nutID]->get_serving();
+        nutrient_amounts[nutID] -= nutrient_serving_in_ing * num_servings_removed;
+      }
     }
   }
   else {

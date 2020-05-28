@@ -123,8 +123,64 @@ TEST_F(RecipeWithMultipleIngredients, AddMultipleIngredientTest) {
   marshIng = nullptr;
 }
 
-// TEST_F(RecipeWithMultipleIngredients, SubtractIngredientTest) {
+TEST_F(RecipeWithMultipleIngredients, SubtractIngredientPartialTest) {
+  // Add the ingredients.
+  my_recipe->add_ingredient(mmIng, mes1);
+  my_recipe->add_ingredient(marshIng, mes2);
 
+  Measurement mes_removed = mes2 / 2;
+
+  my_recipe->subtract_ingredient(marshIng->get_ID(), mes_removed);
+
+  // Now check that the nutrients are tallied correctly.
+  double num_mm_servings = mes1 / mmIng->get_serving_size();
+  double num_marsh_servings = (mes2 - mes_removed) / marshIng->get_serving_size();
+  
+  Measurement calcium_truth = mmIng->nutrients["Calcium, Ca"]->get_serving() * num_mm_servings 
+    + marshIng->nutrients["Calcium, Ca"]->get_serving() * num_marsh_servings;
+  Measurement energy_truth = mmIng->nutrients["Energy"]->get_serving() * num_mm_servings
+    + marshIng->nutrients["Energy"]->get_serving() * num_marsh_servings;
+  Measurement protein_truth = mmIng->nutrients["Protein"]->get_serving() * num_mm_servings
+    + marshIng->nutrients["Protein"]->get_serving() * num_marsh_servings;
+  Measurement fat_truth = mmIng->nutrients["Total lipid (fat)"]->get_serving() * num_mm_servings
+    + marshIng->nutrients["Total lipid (fat)"]->get_serving() * num_marsh_servings;  
+  Measurement carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings
+    + marshIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_marsh_servings;
+
+  EXPECT_TRUE(my_recipe->nutrient_amounts["Calcium, Ca"] == calcium_truth);
+  EXPECT_TRUE(my_recipe->nutrient_amounts["Energy"] == energy_truth);
+  EXPECT_TRUE(my_recipe->nutrient_amounts["Protein"] == protein_truth);
+  EXPECT_TRUE(my_recipe->nutrient_amounts["Total lipid (fat)"] == fat_truth);
+  EXPECT_TRUE(my_recipe->nutrient_amounts["Carbohydrate, by difference"] == carb_truth);
+
+  // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
+  mmIng = nullptr;
+  marshIng = nullptr;
+}
+
+// TEST_F(RecipeWithMultipleIngredients, RemoveIngredientThroughSubtractionTest) {
+//   // Add the ingredients.
+//   my_recipe->add_ingredient(mmIng, mes1);
+//   my_recipe->add_ingredient(marshIng, mes2);
+
+//   my_recipe->subtract_ingredient(marshIng->get_ID(), mes2);
+
+//   // Now check that the nutrients are tallied correctly.
+//   double num_mm_servings = mes1 / mmIng->get_serving_size();  
+//   Measurement calcium_truth = mmIng->nutrients["Calcium, Ca"]->get_serving() * num_mm_servings;
+//   Measurement energy_truth = mmIng->nutrients["Energy"]->get_serving() * num_mm_servings;
+//   Measurement protein_truth = mmIng->nutrients["Protein"]->get_serving() * num_mm_servings;
+//   Measurement fat_truth = mmIng->nutrients["Total lipid (fat)"]->get_serving() * num_mm_servings;  
+//   Measurement carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings;
+
+//   EXPECT_TRUE(my_recipe->nutrient_amounts["Calcium, Ca"] == calcium_truth);
+//   EXPECT_TRUE(my_recipe->nutrient_amounts["Energy"] == energy_truth);
+//   EXPECT_TRUE(my_recipe->nutrient_amounts["Protein"] == protein_truth);
+//   EXPECT_TRUE(my_recipe->nutrient_amounts["Total lipid (fat)"] == fat_truth);
+//   EXPECT_TRUE(my_recipe->nutrient_amounts["Carbohydrate, by difference"] == carb_truth);
+
+//   // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
+//   mmIng = nullptr;
 // }
 
 // TEST_F(RecipeWithMultipleIngredients, RemoveIngredientThroughSubtractionTest) {
