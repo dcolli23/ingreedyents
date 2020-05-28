@@ -1,6 +1,6 @@
 #pragma once
 #include "gtest/gtest.h"
-#include "IngredientResult.h"
+#include "Ingredient.h"
 #include "Measurement.h"
 #include <string>
 #include <fstream>
@@ -10,7 +10,7 @@ const std::string JSON_RESULT_LOCATION = "../tests/data/ingredient_nutrition_get
 
 class IngredientResultTest : public testing::Test {
   protected:
-    IngredientResult* my_result;
+    Ingredient* my_result;
 
     // Set up the IngredientResult during each test.
     void SetUp() override {
@@ -22,7 +22,7 @@ class IngredientResultTest : public testing::Test {
       if (fin.fail()) {
         cout << "File failed to open!" << endl;
       }
-      my_result = new IngredientResult(fin);
+      my_result = new Ingredient(fin);
     }
     void TearDown() override {}
 };

@@ -1,5 +1,5 @@
 #pragma once
-#include "IngredientResult.h"
+#include "Ingredient.h"
 #include "HTTPSGETter.h"
 
 #include <string>
@@ -14,7 +14,7 @@ public:
   IngredientRequest(string UPC, string API_key);
   ~IngredientRequest();
 
-  IngredientResult* make_request();
+  Ingredient* make_request();
 
   string get_FDC_ID_URL();
   string get_detailed_nutrition_URL();
@@ -29,6 +29,6 @@ private:
   string FDC_ID_URL;
   string FDC_ID;
   string detailed_nutrition_URL;
-  IngredientResult* result;
+  Ingredient* result;
   HTTPSGETter* getter;
 };

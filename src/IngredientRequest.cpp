@@ -47,7 +47,7 @@ string IngredientRequest::get_detailed_nutrition_URL() { return detailed_nutriti
 //! Returns the result of the request made with the formed URL.
 //! 
 //! Note: `IngredientRequest::form_URL` must be called before this function.
-IngredientResult* IngredientRequest::make_request() {
+Ingredient* IngredientRequest::make_request() {
   rapidjson::Document doc;
 
   // Make the initial request with the HTTPSGETter to get the FDC ID.
@@ -80,7 +80,7 @@ IngredientResult* IngredientRequest::make_request() {
   getter->make_request();
 
   // Parse the result with the IngredientResult.
-  result = new IngredientResult(getter->get_request_body());
+  result = new Ingredient(getter->get_request_body());
 
   return result;
 }

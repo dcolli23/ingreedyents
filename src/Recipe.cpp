@@ -46,7 +46,7 @@ int Recipe::get_rating() { return rating; }
 string Recipe::get_instructions() { return instructions; }
 
 //! Add an ingredient to the recipe
-void Recipe::add_ingredient(IngredientResult* ing, Measurement serv) {
+void Recipe::add_ingredient(Ingredient* ing, Measurement serv) {
   Nutrient* existing_nut;
   int ingID = ing->get_ID();
   double num_servings = serv / ing->get_serving_size();
@@ -83,7 +83,7 @@ void Recipe::subtract_ingredient(int ingID, Measurement serv) {
   Measurement nutrient_serving_in_ing;
 
   // Make sure the ingredient exists in our list.
-  map<int, IngredientResult*>::iterator ingIt = ingredients.find(ingID);
+  map<int, Ingredient*>::iterator ingIt = ingredients.find(ingID);
   if (ingIt != ingredients.end()) {
     // It's in our ingredient list.
     map<int, Measurement>::iterator ingAmountIt = ingredient_amounts.find(ingID);
@@ -117,7 +117,7 @@ void Recipe::subtract_ingredient(int ingID, Measurement serv) {
 //! Remove an ingredient from the recipe
 void Recipe::remove_ingredient(int ingID) {
   // Make sure the ingredient exists in our list.
-  map<int, IngredientResult*>::iterator ingIt = ingredients.find(ingID);
+  map<int, Ingredient*>::iterator ingIt = ingredients.find(ingID);
   if (ingIt != ingredients.end()) {
     // It's in our ingredient list.
     

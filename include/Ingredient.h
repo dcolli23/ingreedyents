@@ -20,11 +20,11 @@ const double INVALID_DOUBLE = -1.0;
  * Responsible for parsing the body of the HTTPS GET request (a JSON string) and storing results
  * in this class.
  */
-class IngredientResult {
+class Ingredient {
 public:
-  IngredientResult(string json_result_string);
-  IngredientResult(ifstream&);
-  ~IngredientResult();
+  Ingredient(string json_result_string);
+  Ingredient(ifstream&);
+  ~Ingredient();
 
   void set_body(string body);
   

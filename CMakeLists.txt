@@ -33,7 +33,7 @@ endif(BUILD_TESTS)
 # Find files for this repository - this needs to be updated for every new src file.
 #---------------------------------------------------------------------------------------------------
 set(SOURCES
-    src/IngredientResult.cpp
+    src/Ingredient.cpp
     src/HTTPSGETter.cpp
     src/JSONFuncs.cpp
     src/IngredientRequest.cpp

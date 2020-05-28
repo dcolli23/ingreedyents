@@ -1,7 +1,7 @@
-#include "IngredientResult.h"
+#include "Ingredient.h"
 
 //! Constructor
-IngredientResult::IngredientResult(string json_result_string) {
+Ingredient::Ingredient(string json_result_string) {
   body = json_result_string;
   ID = INVALID_INT;
   ingredient_name = INVALID_STRING;
@@ -9,7 +9,7 @@ IngredientResult::IngredientResult(string json_result_string) {
 }
 
 //! Constructor
-IngredientResult::IngredientResult(ifstream& fin) {
+Ingredient::Ingredient(ifstream& fin) {
   fin.seekg(0, ios::end);
   body.reserve(fin.tellg());
   fin.seekg(0, ios::beg);
@@ -20,25 +20,25 @@ IngredientResult::IngredientResult(ifstream& fin) {
 }
 
 //! Desctructor
-IngredientResult::~IngredientResult() {}
+Ingredient::~Ingredient() {}
 
 //! Sets the body of the HTTPS GET request result
-void IngredientResult::set_body(string body) { this->body = body; }
+void Ingredient::set_body(string body) { this->body = body; }
 
 //! Returns the unparsed `body` of the HTTPS GET request as a string
-string IngredientResult::get_body() { return body; }
+string Ingredient::get_body() { return body; }
 
 //! Returns the ID for this ingredient
-int IngredientResult::get_ID() { return ID; }
+int Ingredient::get_ID() { return ID; }
 
 //! Returns the name of the ingredient
-string IngredientResult::get_ingredient_name() { return ingredient_name; }
+string Ingredient::get_ingredient_name() { return ingredient_name; }
 
 //! Returns the serving size
-Measurement IngredientResult::get_serving_size() { return serving_size; }
+Measurement Ingredient::get_serving_size() { return serving_size; }
 
 //! Parses `body` and stores parsed results as private members of this class 
-void IngredientResult::parse_body() {
+void Ingredient::parse_body() {
   string nut_name;
   rapidjson::Document doc;
   Nutrient* nut;
@@ -79,6 +79,6 @@ void IngredientResult::parse_body() {
 }
 
 //! Gets the macro gram amount from the macro's string
-int IngredientResult::get_macro_gram_amount(string macro_str) {
+int Ingredient::get_macro_gram_amount(string macro_str) {
   return stoi(macro_str.substr(0, macro_str.length() - 1));
 }

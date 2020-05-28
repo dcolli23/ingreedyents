@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IngredientResult.h"
+#include "Ingredient.h"
 #include "Measurement.h"
 #include "Nutrient.h"
 
@@ -25,11 +25,11 @@ public:
   int get_rating();
   string get_instructions();
 
-  void add_ingredient(IngredientResult*, Measurement);
+  void add_ingredient(Ingredient*, Measurement);
   void subtract_ingredient(int, Measurement);
   void remove_ingredient(int);
 
-  map<int, IngredientResult*> ingredients;
+  map<int, Ingredient*> ingredients;
   map<int, Measurement> ingredient_amounts;
   map<string, Nutrient*> nutrition_info;
   map<string, Measurement> nutrient_amounts;
