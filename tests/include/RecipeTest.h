@@ -24,7 +24,7 @@ class RecipeTest : public testing::Test {
 class RecipeWithMultipleIngredients : public testing::Test {
   protected:
     Recipe* my_recipe;
-    IngredientResult *mmIng, *marshIng;
+    Ingredient *mmIng, *marshIng;
     Measurement mes1, mes2;
 
     void SetUp() override {
@@ -41,8 +41,8 @@ class RecipeWithMultipleIngredients : public testing::Test {
       if (mmFin.fail() || marshFin.fail()) {
         cout << "File failed to open!" << endl;
       }
-      mmIng = new IngredientResult(mmFin);
-      marshIng = new IngredientResult(marshFin);
+      mmIng = new Ingredient(mmFin);
+      marshIng = new Ingredient(marshFin);
     }
 
     void TearDown() override {

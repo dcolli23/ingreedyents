@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 // All of the test files we want to run.
-#include "IngredientResultTest.h"
+#include "IngredientTest.h"
 #include "CURLTest.h"
 #include "HTTPSGETterTest.h"
 #include "IngredientRequestTest.h"
