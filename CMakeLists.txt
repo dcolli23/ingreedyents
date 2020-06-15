@@ -59,15 +59,19 @@ set(MAIN_LIB_FLAGS
 # Build stuff - also change when needed.
 #---------------------------------------------------------------------------------------------------
 # Compile to library.
-add_library(${LIBRARY_NAME} OBJECT ${SOURCES})
+add_library(${LIBRARY_NAME} SHARED ${SOURCES})
+
+# Install the library where we want it.
+# NOTE: I'm leaving this off right now since it's just built in the build directory 
+#       but it might be worthwhile to do some investigation on best practices.
+#install(TARGETS ${LIBRARY_NAME} DESTINATION /usr/lib)
 
 # Include headers.
 include_directories(include)
 include_directories(external/include)
 include_directories( /usr/include/x86_64-linux-gnu ) # For using libcurl for HTTPS requests.
 
-message( curl found: ${CURL_FOUND} )
-message( Curl directories: ${CURL_INCLUDE_DIRS} )
+# Generate the executable.
 add_executable(${LIBRARY_NAME}_main app/main.cpp ${SOURCES})
 
 # Link the libcurl libraries to our executable.
