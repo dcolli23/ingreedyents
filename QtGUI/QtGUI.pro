@@ -32,3 +32,17 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+# Link to the Ingreedyents library
+unix:!macx: LIBS += -L$$PWD/../build/ -lingreedyents
+
+# Link to cURL library.
+unix:!macx: LIBS += -lcurl
+
+# Add the dependencies for the library
+INCLUDEPATH += $$PWD/../include
+DEPENDPATH += $$PWD/../include
+INCLUDEPATH += $$PWD/../external/include
+DEPENDPATH += $$PWD/../external/include
+INCLUDEPATH += /usr/include/x86_64-linux-gnu
+DEPENDPATH += /usr/include/x86_64-linux-gnu
