@@ -40,3 +40,7 @@ docs/Gemfile.lock
 
 # VS Code settings that are different between machines.
 .vscode
+
+# Builds for Qt GUI
+build-QtGUI-Desktop-Debug/
+build-QtGUI-Desktop-Release/
