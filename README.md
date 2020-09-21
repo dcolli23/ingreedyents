@@ -138,7 +138,9 @@ This project uses the `googletest` framework for testing functionality. This is 
 
 Note: Test suite is used to refer to a new group of tests indepenedent from other tests. In this repository, we're making a new header file for each test suite and writing a new test suite for each class.
 
-1. Make a new `.h` file in the `/tests/include` directory of the repository. Name it the name of the test suite.
+1. Make a new `.h` file in the `/tests/include` directory of the repository. 
+    + The name of the new header file should be the name of the class under test concatenated with `Test.h`. Example:
+        If you're testing `MyClass`, the name of the header file would be `MyClassTest.h`.
 2. In the new `<test_suite>.h` file, write the following as boilerplate:
     ```c++
     #include "<name_of_class_under_test>"
@@ -150,9 +152,11 @@ Note: Test suite is used to refer to a new group of tests indepenedent from othe
       // insert code for test here using:
       //    ASSERT_*(x, y) when you want the test to halt on failure.
       //    EXPECT_*(x, y) when you want the test to continue upon failure.
+      //                   The EXPECT is best practice.
     }
     ```
+    You can read more about test fixtures in the google test documentation.
 3. Write the first test that you would like.
-4. In `tests/main.cpp`, `include` your new test suite header file.
+4. In `tests/main.cpp`, `#include` your new test suite header file.
 
 
