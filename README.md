@@ -3,19 +3,21 @@
 
 # Table of Contents
 
-+ [Overview](#overview)
-+ [Language](#language)
-+ [Building](#building)
-  + [Dependencies](#dependencies)
-+ [Plan of Action](#plan-of-action)
-  + [Reading the UPC](#reading-the-upc)
-  + [Getting the Product Information](#getting-the-product-information)
-  + [Obtaining the Optimized Recipe Choices](#obtaining-the-optimized-recipe-choices)
-  + [User Interface to Select Recipe](#user-interface-to-select-recipe)
-+ [Documentation](#documentation)
-+ [Testing](#testing)
-  + [Running Tests](#running-tests)
-  + [Writing Tests](#writing-tests)
+- [**ingreedyents**](#ingreedyents)
+- [Table of Contents](#table-of-contents)
+- [Overview](#overview)
+- [Language](#language)
+- [Building](#building)
+  - [Dependencies](#dependencies)
+- [Plan of Action](#plan-of-action)
+  - [Reading the UPC](#reading-the-upc)
+  - [Getting the Product Information](#getting-the-product-information)
+  - [Obtaining the Optimized Recipe Choices](#obtaining-the-optimized-recipe-choices)
+  - [User Interface to Select Recipe](#user-interface-to-select-recipe)
+- [Documentation](#documentation)
+- [Testing](#testing)
+  - [Running Tests](#running-tests)
+  - [Writing Tests](#writing-tests)
 
 # Overview
 
@@ -54,24 +56,23 @@ make
 CMake will automatically pull the `googletest` framework for you. Alternatively, you can run:
 
 ```
-./run_tests.sh
+./rebuild_everything.sh
 ```
 
 In the root of the repository.
 
-If you would like to build ingreedyents without running tests, type the following in a terminal while in the root directory of the repository:
+If you would like to just rebuild ingreedyents, type the following in a terminal while in the root directory of the repository:
 
 ```
-rm -rf build
-mkdir build && cd build
-cmake -DBUILD_TESTS=OFF ..
+cd build
+cmake ..
 make
 ```
 
 Alternatively, you can run:
 
 ```
-./build_app_no_tests.sh
+./rebuild_app_only.sh
 ```
 
 ## Dependencies
