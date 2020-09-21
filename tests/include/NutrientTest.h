@@ -1,13 +1,16 @@
 #include "Nutrient.h"
 #include "JSONFuncs.h"
-#include "Measurement.h"
 
+#include <uniTypes/uniTypes.h>
 #include "gtest/gtest.h"
-
 
 #include <fstream>
 
+using namespace uniTypes::string_literals;
+
 const string NUTRIENT_FILE = "../tests/data/example_nutrient.json";
+
+const double ERROR_TOL = 1e-5;
 
 class NutrientTest : public testing::Test {
   protected:
@@ -29,33 +32,31 @@ class NutrientTest : public testing::Test {
 
 TEST_F(NutrientTest, InitializationTest) {
   string name_truth = "Calcium, Ca";
-  double amount_truth = 95.00000000;
-  string unit_truth = "mg";
-  Measurement serving_test;
+  uniTypes::Mass serving_truth = 95.0_mg;
+  uniTypes::Mass serving_test;
 
   string name_test = my_nutrient->get_name();
   serving_test = my_nutrient->get_serving();
 
   EXPECT_EQ(name_test, name_truth);
-  EXPECT_EQ(serving_test.get_amount(), amount_truth);
-  EXPECT_EQ(serving_test.get_unit(), unit_truth);
+  EXPECT_NEAR(serving_test.convertTo(uniTypes::milligram), 
+    serving_truth.convertTo(uniTypes::milligram), ERROR_TOL);
 }
 
 TEST_F(NutrientTest, SetServingTest) {
-  double additional_amount = 10.0;
-  double amount_truth = 105.0;
-  string unit = "mg";
-  Measurement new_mes;
-  new_mes.set_amount(additional_amount);
-  new_mes.set_unit(unit);
+  uniTypes::Mass additional_amount = 10.0_g;
+  uniTypes::Mass amount_truth = 105.0_g;
+  
+  uniTypes::Mass prev_mes = my_nutrient->get_serving();
+  my_nutrient->set_serving(prev_mes + additional_amount);
 
-  Measurement prev_mes = my_nutrient->get_serving();
-  my_nutrient->set_serving(prev_mes + new_mes);
-
-  EXPECT_EQ(amount_truth, my_nutrient->get_serving().get_amount());
-  EXPECT_EQ(unit, my_nutrient->get_serving().get_unit());
+  EXPECT_NEAR(amount_truth.convertTo(uniTypes::gram),
+    my_nutrient->get_serving().convertTo(uniTypes::gram), ERROR_TOL);
 }
 
 TEST_F(NutrientTest, SetNameTest) {
+  string name_test = "this is a test name";
+  my_nutrient->set_name(name_test);
 
+  EXPECT_EQ(name_test, my_nutrient->get_name());
 }

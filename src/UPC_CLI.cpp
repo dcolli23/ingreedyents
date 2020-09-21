@@ -1,6 +1,6 @@
 #include "UPC_CLI.h"
 #include "IngredientRequest.h"
-#include "IngredientResult.h"
+#include "Ingredient.h"
 #include "Measurement.h"
 
 //! Constructor
@@ -17,7 +17,7 @@ UPC_CLI::~UPC_CLI() {
 void UPC_CLI::start_CLI() {
   string user_response;
   IngredientRequest* user_request;
-  IngredientResult* ing_result;
+  Ingredient* ing_result;
   Measurement serving;
 
   // Ask for the API key.
