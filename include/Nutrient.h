@@ -1,7 +1,7 @@
 #pragma once
 #include "JSONFuncs.h"
-#include "Measurement.h"
 
+#include <uniTypes/uniTypes.h>
 #include <rapidjson/document.h>
 
 #include <string>
@@ -13,11 +13,12 @@ public:
   ~Nutrient();
 
   string get_name();
-  Measurement get_serving();
+  uniTypes::Mass get_serving();
 
-  void set_serving(Measurement);
+  void set_serving(uniTypes::Mass);
+  void set_name(string);
 
 private:
   string name;
-  Measurement serving;
+  uniTypes::Mass serving;
 };
