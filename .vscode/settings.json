@@ -6,7 +6,8 @@
     "string_view": "cpp",
     "regex": "cpp",
     "iostream": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "*.tcc": "cpp"
   },
   "C_Cpp.intelliSenseEngineFallback": "Disabled"
 }
