@@ -1,3 +1,4 @@
+#pragma once
 #include "HTTPSGETter.h"
 
 #include "gtest/gtest.h"

@@ -1,3 +1,4 @@
+#pragma once
 #include "Recipe.h"
 #include "Measurement.h"
 #include "gtest/gtest.h"
@@ -75,7 +76,8 @@ TEST_F(RecipeWithMultipleIngredients, AddIngredientTest) {
   EXPECT_EQ(ID_test, ID_truth);
 
   // Now check that the nutrients are tallied correctly.
-  double num_mm_servings = mes1 / mmIng->get_serving_size();
+  uniTypes::Mass mmIng_serving_size = mmIng->get_serving_size();
+  double num_mm_servings = mes1 / mmIng_serving_size;
 
   uniTypes::Mass calcium_truth = mmIng->nutrients["Calcium, Ca"]->get_serving() * num_mm_servings;
 

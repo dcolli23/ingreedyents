@@ -1,3 +1,4 @@
+#pragma once
 #include "JSONFuncs.h"
 #include "gtest/gtest.h"
 

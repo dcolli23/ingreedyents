@@ -1,3 +1,4 @@
+#pragma once
 #include "IngredientRequest.h"
 #include "gtest/gtest.h"
 

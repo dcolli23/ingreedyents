@@ -1,3 +1,4 @@
+#pragma once
 #include "Measurement.h"
 #include "gtest/gtest.h"
 
