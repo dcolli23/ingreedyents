@@ -1,11 +1,18 @@
 #!/bin/bash
 
+# No need to make the build directory if it's already there.
 if [ -d build ]
 then
   cd build
 else
   mkdir build
   cd build
+fi
+
+# Delete the old test executable.
+if [ -f test_main ]
+then
+  rm test_main
 fi
 
 cmake -DRUN_TESTS=ON ..
