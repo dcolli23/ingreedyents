@@ -15,7 +15,7 @@ public:
   string get_name();
   uniTypes::Mass get_serving();
 
-  void set_serving(uniTypes::Mass);
+  void set_serving(uniTypes::Mass&);
   void set_name(string);
 
 private:

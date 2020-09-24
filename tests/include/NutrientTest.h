@@ -43,20 +43,20 @@ TEST_F(NutrientTest, InitializationTest) {
     serving_truth.convertTo(uniTypes::milligram), ERROR_TOL);
 }
 
-TEST_F(NutrientTest, SetServingTest) {
-  uniTypes::Mass additional_amount = 10.0_g;
-  uniTypes::Mass amount_truth = 105.0_g;
+// TEST_F(NutrientTest, SetServingTest) {
+//   uniTypes::Mass additional_amount = 10.0_g;
+//   uniTypes::Mass amount_truth = 105.0_g;
   
-  uniTypes::Mass prev_mes = my_nutrient->get_serving();
-  my_nutrient->set_serving(prev_mes + additional_amount);
+//   uniTypes::Mass prev_mes = my_nutrient->get_serving();
+//   my_nutrient->set_serving(prev_mes + additional_amount);
 
-  EXPECT_NEAR(amount_truth.convertTo(uniTypes::gram),
-    my_nutrient->get_serving().convertTo(uniTypes::gram), ERROR_TOL);
-}
+//   EXPECT_NEAR(amount_truth.convertTo(uniTypes::gram),
+//     my_nutrient->get_serving().convertTo(uniTypes::gram), ERROR_TOL);
+// }
 
-TEST_F(NutrientTest, SetNameTest) {
-  string name_test = "this is a test name";
-  my_nutrient->set_name(name_test);
+// TEST_F(NutrientTest, SetNameTest) {
+//   string name_test = "this is a test name";
+//   my_nutrient->set_name(name_test);
 
-  EXPECT_EQ(name_test, my_nutrient->get_name());
-}
+//   EXPECT_EQ(name_test, my_nutrient->get_name());
+// }

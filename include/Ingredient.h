@@ -4,6 +4,7 @@
 #include "Measurement.h"
 
 #include "rapidjson/document.h"
+#include <uniTypes/uniTypes.h>
 
 #include <string>
 #include <iostream>
@@ -35,11 +36,12 @@ public:
   // int get_carbs();
   // int get_fat();
   // int get_protein();
-  Measurement get_serving_size();
+  uniTypes::Mass get_serving_size();
 
   void parse_body();
 
   map<string, Nutrient*> nutrients;
+  uniTypes::Energy calories;
 
 private:
   string body;
@@ -49,5 +51,5 @@ private:
   // Ingredient information.
   int ID;
   string ingredient_name;
-  Measurement serving_size;
+  uniTypes::Mass serving_size;
 };

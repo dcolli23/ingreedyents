@@ -3,6 +3,8 @@
 #include "Ingredient.h"
 #include "Measurement.h"
 
+#include <uniTypes/uniTypes.h>
+
 //! Constructor
 UPC_CLI::UPC_CLI() {
   cout << "UPC_CLI constructor called" << endl;
@@ -18,7 +20,7 @@ void UPC_CLI::start_CLI() {
   string user_response;
   IngredientRequest* user_request;
   Ingredient* ing_result;
-  Measurement serving;
+  uniTypes::Mass serving;
 
   // Ask for the API key.
   // cout << "Please enter your unique spoonacular API key: ";
@@ -43,7 +45,7 @@ void UPC_CLI::start_CLI() {
     cout << "\tIngredient name: " << ing_result->get_ingredient_name() << endl;
     for (auto const& [key, value] : ing_result->nutrients){
       serving = value->get_serving();
-      cout << "\t\t" << key << ": " << serving.get_amount() << ' ' << serving.get_unit() << endl;
+      cout << "\t\t" << key << ": " << serving.convertTo(uniTypes::milligram) << ' ' << "grams\n";
     }
   }
 

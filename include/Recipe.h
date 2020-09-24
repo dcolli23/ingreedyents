@@ -4,6 +4,8 @@
 #include "Measurement.h"
 #include "Nutrient.h"
 
+#include <uniTypes/uniTypes.h>
+
 #include <iostream>
 #include <map>
 #include <string>
@@ -16,7 +18,7 @@ public:
 
   // Gets
 
-  Measurement get_serving();
+  uniTypes::Mass get_serving();
   double get_calories_per_serving();
   double get_net_carbs_g_per_serving();
   double get_protein_g_per_serving();
@@ -25,17 +27,17 @@ public:
   int get_rating();
   string get_instructions();
 
-  void add_ingredient(Ingredient*, Measurement);
-  void subtract_ingredient(int, Measurement);
+  void add_ingredient(Ingredient*, uniTypes::Mass);
+  void subtract_ingredient(int, uniTypes::Mass);
   void remove_ingredient(int);
 
   map<int, Ingredient*> ingredients;
-  map<int, Measurement> ingredient_amounts;
+  map<int, uniTypes::Mass> ingredient_amounts;
   map<string, Nutrient*> nutrition_info;
-  map<string, Measurement> nutrient_amounts;
+  map<string, uniTypes::Mass> nutrient_amounts;
 
 private:
-  struct Measurement serving;
+  uniTypes::Mass serving;
   double calories_per_serving;
   double net_carbs_g_per_serving;
   double protein_g_per_serving;
