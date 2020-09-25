@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+#include "uniTypes/uniTypes.h"
+
 using namespace std;
 
 class UPC_CLI {

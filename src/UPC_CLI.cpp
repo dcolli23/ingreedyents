@@ -3,8 +3,6 @@
 #include "Ingredient.h"
 #include "Measurement.h"
 
-#include <uniTypes/uniTypes.h>
-
 //! Constructor
 UPC_CLI::UPC_CLI() {
   cout << "UPC_CLI constructor called" << endl;

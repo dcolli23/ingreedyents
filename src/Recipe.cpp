@@ -20,7 +20,7 @@ Recipe::~Recipe() {
 }
 
 //! Returns the serving size information
-Measurement Recipe::get_serving() { return serving; }
+uniTypes::Mass Recipe::get_serving() { return serving; }
 
 //! Returns the calories per serving in kcals
 double Recipe::get_calories_per_serving() { return calories_per_serving; }
@@ -46,10 +46,11 @@ int Recipe::get_rating() { return rating; }
 string Recipe::get_instructions() { return instructions; }
 
 //! Add an ingredient to the recipe
-void Recipe::add_ingredient(Ingredient* ing, Measurement serv) {
+void Recipe::add_ingredient(Ingredient* ing, uniTypes::Mass serv) {
   Nutrient* existing_nut;
   int ingID = ing->get_ID();
-  double num_servings = serv / ing->get_serving_size();
+  uniTypes::Mass ing_serv_size = ing->get_serving_size();
+  double num_servings = serv / ing_serv_size;
 
   // Tally the ingredient and the amount into our ingredients list.
   if (ingredients.find(ingID) == ingredients.end()) {
@@ -64,47 +65,50 @@ void Recipe::add_ingredient(Ingredient* ing, Measurement serv) {
 
   // Tally the nutrition information for this ingredient.
   for (auto const& [nutID, nut] : ing->nutrients) {
+    uniTypes::Mass nut_serv = nut->get_serving();
     if (nutrition_info.find(nutID) == nutrition_info.end()) {
       // The nutrient is new and we can directly add the nutrient.
       nutrition_info[nutID] = nut;
-      nutrient_amounts[nutID] = nut->get_serving() * num_servings;
+      nutrient_amounts[nutID] = nut_serv * num_servings;
     }
     else {
       // Otherwise, we have to tally the nutrient amount to our existing amount.
-      nutrient_amounts[nutID] = nutrient_amounts[nutID] 
-        + nut->get_serving() * num_servings;
+      uniTypes::Mass tot_nut_serv = nut_serv * num_servings;
+      nutrient_amounts[nutID] = nutrient_amounts[nutID] + tot_nut_serv;
     }
   }
 }
 
 //! Subtract given amount from ingredient with given ID
-void Recipe::subtract_ingredient(int ingID, Measurement serv) {
+void Recipe::subtract_ingredient(int ingID, uniTypes::Mass ing_amount_subtracted) {
   double num_servings_removed;
-  Measurement nutrient_serving_in_ing;
+  uniTypes::Mass nutrient_serving_in_ing;
 
   // Make sure the ingredient exists in our list.
   map<int, Ingredient*>::iterator ingIt = ingredients.find(ingID);
   if (ingIt != ingredients.end()) {
     // It's in our ingredient list.
-    map<int, Measurement>::iterator ingAmountIt = ingredient_amounts.find(ingID);
-    double new_amount = ingAmountIt->second.get_amount() - serv.get_amount();
+    map<int, uniTypes::Mass>::iterator ingAmountIt = ingredient_amounts.find(ingID);
+    uniTypes::Mass new_amount = ingAmountIt->second - ing_amount_subtracted;
     
     // Remove the ingredient if it is less than or equal to zero.
-    if (new_amount <= 0.0) {
+    if (new_amount.getValue() <= 0.0) {
       remove_ingredient(ingID);
     }
     else {
       // Calculate the number of servings removed for calculating the new amount of nutrients in 
       // recipe.
-      num_servings_removed = serv / ingredients[ingID]->get_serving_size();
+      uniTypes::Mass ingredient_serving_size = ingredients[ingID]->get_serving_size();
+      num_servings_removed = ing_amount_subtracted / ingredient_serving_size;
 
       // Set the new amount of the ingredient in the recipe.
-      ingAmountIt->second.set_amount(new_amount);
+      ingAmountIt->second = new_amount;
 
       // Calculate the remaining nutrients in the recipe.
       for (auto const& [nutID, nut] : ingIt->second->nutrients) {
         nutrient_serving_in_ing = ingIt->second->nutrients[nutID]->get_serving();
-        nutrient_amounts[nutID] -= nutrient_serving_in_ing * num_servings_removed;
+        uniTypes::Mass tot_nutrient_removed = nutrient_serving_in_ing * num_servings_removed;
+        nutrient_amounts[nutID] -= tot_nutrient_removed;
       }
     }
   }
@@ -122,12 +126,15 @@ void Recipe::remove_ingredient(int ingID) {
     // It's in our ingredient list.
     
     // We have to remove the nutrients coming from this ingredient from our recipe.
-    double num_servings_removed = ingredient_amounts[ingID] / ingIt->second->get_serving_size();
+    uniTypes::Mass ing_serv_size = ingIt->second->get_serving_size();
+    double num_servings_removed = ingredient_amounts[ingID] / ing_serv_size;
     for (auto const& [nutID, nut] : ingIt->second->nutrients) {
-      nutrient_amounts[nutID] -= nut->get_serving() * num_servings_removed;
+      uniTypes::Mass nut_serv = nut->get_serving();
+      uniTypes::Mass tot_nut_removed = nut_serv * num_servings_removed;
+      nutrient_amounts[nutID] -= tot_nut_removed;
       
       // Remove the nutrient entirely if there's none left.
-      if (nutrient_amounts[nutID].get_amount() <= 0) {
+      if (nutrient_amounts[nutID].getValue() <= 0) {
         nutrient_amounts.erase(nutID);
         nutrition_info.erase(nutID);
       }

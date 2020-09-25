@@ -1,8 +1,8 @@
 #pragma once
 #include "JSONFuncs.h"
 
-#include <uniTypes/uniTypes.h>
-#include <rapidjson/document.h>
+#include "uniTypes/uniTypes.h"
+#include "rapidjson/document.h"
 
 #include <string>
 using namespace std;

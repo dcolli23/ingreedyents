@@ -4,7 +4,7 @@
 #include "Measurement.h"
 
 #include "rapidjson/document.h"
-#include <uniTypes/uniTypes.h>
+#include "uniTypes/uniTypes.h"
 
 #include <string>
 #include <iostream>
