@@ -13,12 +13,14 @@ public:
   ~Nutrient();
 
   string get_name();
-  uniTypes::Mass get_serving();
+  uniTypes::RatioBase* get_serving();
 
-  void set_serving(uniTypes::Mass&);
+  void set_serving(uniTypes::RatioBase*);
   void set_name(string);
 
 private:
   string name;
-  uniTypes::Mass serving;
+
+  // Storing as RatioBase since we're not sure what unit the serving is in.
+  uniTypes::RatioBase* serving;
 };

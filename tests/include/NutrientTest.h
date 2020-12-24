@@ -11,8 +11,6 @@ using namespace uniTypes::string_literals;
 
 const string NUTRIENT_FILE = "../tests/data/example_nutrient.json";
 
-const double ERROR_TOL = 1e-5;
-
 class NutrientTest : public testing::Test {
   protected:
     Nutrient* my_nutrient;
@@ -40,8 +38,8 @@ TEST_F(NutrientTest, InitializationTest) {
   serving_test = my_nutrient->get_serving();
 
   EXPECT_EQ(name_test, name_truth);
-  EXPECT_NEAR(serving_test.convertTo(uniTypes::milligram), 
-    serving_truth.convertTo(uniTypes::milligram), ERROR_TOL);
+  EXPECT_FLOAT_EQ(serving_test.convertTo(uniTypes::milligram), 
+    serving_truth.convertTo(uniTypes::milligram));
 }
 
 TEST_F(NutrientTest, SetServingTest) {

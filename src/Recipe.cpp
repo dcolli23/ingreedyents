@@ -64,12 +64,16 @@ void Recipe::add_ingredient(Ingredient* ing, uniTypes::Mass serv) {
   }
 
   // Tally the nutrition information for this ingredient.
+  uniTypes::RatioBase* nut_serv;
   for (auto const& [nutID, nut] : ing->nutrients) {
-    uniTypes::Mass nut_serv = nut->get_serving();
+    nut_serv = nut->get_serving();
     if (nutrition_info.find(nutID) == nutrition_info.end()) {
       // The nutrient is new and we can directly add the nutrient.
       nutrition_info[nutID] = nut;
       nutrient_amounts[nutID] = nut_serv * num_servings;
+
+      // we at least want to make a new uniTypes object for this.
+      nutrient_amounts[nutID] = new 
     }
     else {
       // Otherwise, we have to tally the nutrient amount to our existing amount.

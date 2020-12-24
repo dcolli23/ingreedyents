@@ -32,10 +32,7 @@ public:
   string get_body();
   int get_ID();
   string get_ingredient_name();
-  // double get_calories();
-  // int get_carbs();
-  // int get_fat();
-  // int get_protein();
+  
   uniTypes::Mass get_serving_size();
 
   void parse_body();

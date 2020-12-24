@@ -9,7 +9,6 @@ using namespace uniTypes::string_literals;
 
 const string MM_ING_FILEPATH = "../tests/data/ingredient_nutrition_get_result.json";
 const string MARSH_ING_FILEPATH = "../tests/data/marshmellow_fluff_ingredient.json";
-const double ERROR_TOL = 1e-5;
 
 class RecipeTest : public testing::Test {
   protected:
@@ -76,8 +75,7 @@ TEST_F(RecipeWithMultipleIngredients, AddIngredientTest) {
   EXPECT_EQ(ID_test, ID_truth);
 
   // Now check that the nutrients are tallied correctly.
-  uniTypes::Mass mmIng_serving_size = mmIng->get_serving_size();
-  double num_mm_servings = mes1 / mmIng_serving_size;
+  double num_mm_servings = mes1 / mmIng->get_serving_size();
 
   uniTypes::Mass calcium_truth = mmIng->nutrients["Calcium, Ca"]->get_serving() * num_mm_servings;
 
@@ -132,6 +130,8 @@ TEST_F(RecipeWithMultipleIngredients, AddMultipleIngredientTest) {
 }
 
 TEST_F(RecipeWithMultipleIngredients, SubtractIngredientPartialTest) {
+  double test_amount, truth_amount;
+
   // Add the ingredients.
   my_recipe->add_ingredient(mmIng, mes1);
   my_recipe->add_ingredient(marshIng, mes2);
@@ -155,20 +155,30 @@ TEST_F(RecipeWithMultipleIngredients, SubtractIngredientPartialTest) {
   uniTypes::Mass carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings
     + marshIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_marsh_servings;
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_amount(), calcium_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Calcium, Ca"].convertTo(uniTypes::gram);
+  truth_amount = calcium_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Energy"].get_amount(), energy_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Energy"].convertTo(uniTypes::gram);
+  truth_amount = energy_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Protein"].get_amount(), protein_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Protein"].convertTo(uniTypes::gram);
+  truth_amount = protein_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_amount(), fat_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Total lipid (fat)"].convertTo(uniTypes::gram);
+  truth_amount = fat_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_amount(), carb_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Carbohydrate, by difference"].convertTo(uniTypes::gram);
+  truth_amount = carb_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
 
   // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
   mmIng = nullptr;
@@ -176,6 +186,8 @@ TEST_F(RecipeWithMultipleIngredients, SubtractIngredientPartialTest) {
 }
 
 TEST_F(RecipeWithMultipleIngredients, RemoveIngredientThroughSubtractionTest) {
+  double test_amount, truth_amount;
+
   // Add the ingredients.
   my_recipe->add_ingredient(mmIng, mes1);
   my_recipe->add_ingredient(marshIng, mes2);
@@ -190,26 +202,38 @@ TEST_F(RecipeWithMultipleIngredients, RemoveIngredientThroughSubtractionTest) {
   uniTypes::Mass fat_truth = mmIng->nutrients["Total lipid (fat)"]->get_serving() * num_mm_servings;  
   uniTypes::Mass carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings;
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_amount(), calcium_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Calcium, Ca"].convertTo(uniTypes::gram);
+  truth_amount = calcium_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Energy"].get_amount(), energy_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Energy"].convertTo(uniTypes::gram);
+  truth_amount = energy_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Protein"].get_amount(), protein_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Protein"].convertTo(uniTypes::gram);
+  truth_amount = protein_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_amount(), fat_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Total lipid (fat)"].convertTo(uniTypes::gram);
+  truth_amount = fat_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_amount(), carb_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Carbohydrate, by difference"].convertTo(uniTypes::gram);
+  truth_amount = carb_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
 
   // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
   mmIng = nullptr;
 }
 
 TEST_F(RecipeWithMultipleIngredients, RemoveIngredientTest) {
+  double test_amount, truth_amount;
+
   // Add the ingredients.
   my_recipe->add_ingredient(mmIng, mes1);
   my_recipe->add_ingredient(marshIng, mes2);
@@ -224,20 +248,30 @@ TEST_F(RecipeWithMultipleIngredients, RemoveIngredientTest) {
   uniTypes::Mass fat_truth = mmIng->nutrients["Total lipid (fat)"]->get_serving() * num_mm_servings;  
   uniTypes::Mass carb_truth = mmIng->nutrients["Carbohydrate, by difference"]->get_serving() * num_mm_servings;
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_amount(), calcium_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Calcium, Ca"].convertTo(uniTypes::gram);
+  truth_amount = calcium_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Calcium, Ca"].get_unit(), calcium_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Energy"].get_amount(), energy_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Energy"].convertTo(uniTypes::gram);
+  truth_amount = energy_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Energy"].get_unit(), energy_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Protein"].get_amount(), protein_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Protein"].convertTo(uniTypes::gram);
+  truth_amount = protein_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Protein"].get_unit(), protein_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_amount(), fat_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Total lipid (fat)"].convertTo(uniTypes::gram);
+  truth_amount = fat_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Total lipid (fat)"].get_unit(), fat_truth.get_unit());
 
-  EXPECT_FLOAT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_amount(), carb_truth.get_amount());
-  EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
+  test_amount = my_recipe->nutrient_amounts["Carbohydrate, by difference"].convertTo(uniTypes::gram);
+  truth_amount = carb_truth.convertTo(uniTypes::gram);
+  EXPECT_FLOAT_EQ(test_amount, truth_amount);
+  // EXPECT_EQ(my_recipe->nutrient_amounts["Carbohydrate, by difference"].get_unit(), carb_truth.get_unit());
 
   // mmIng is deleted with the recipe so set to nullptr here to avoid double free.
   mmIng = nullptr;

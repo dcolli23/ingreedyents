@@ -18,7 +18,7 @@ void UPC_CLI::start_CLI() {
   string user_response;
   IngredientRequest* user_request;
   Ingredient* ing_result;
-  uniTypes::Mass serving;
+  uniTypes::RatioBase* p_serving;
 
   // Ask for the API key.
   // cout << "Please enter your unique spoonacular API key: ";
@@ -42,8 +42,8 @@ void UPC_CLI::start_CLI() {
 
     cout << "\tIngredient name: " << ing_result->get_ingredient_name() << endl;
     for (auto const& [key, value] : ing_result->nutrients){
-      serving = value->get_serving();
-      cout << "\t\t" << key << ": " << serving.convertTo(uniTypes::milligram) << ' ' << "grams\n";
+      p_serving = value->get_serving();
+      cout << "\t\t" << key << ": " << p_serving->value << "\n";
     }
   }
 

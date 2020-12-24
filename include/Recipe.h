@@ -34,7 +34,7 @@ public:
   map<int, Ingredient*> ingredients;
   map<int, uniTypes::Mass> ingredient_amounts;
   map<string, Nutrient*> nutrition_info;
-  map<string, uniTypes::Mass> nutrient_amounts;
+  map<string, uniTypes::RatioBase*> nutrient_amounts;
 
 private:
   uniTypes::Mass serving;

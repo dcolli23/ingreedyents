@@ -11,21 +11,31 @@ Nutrient::Nutrient(const rapidjson::Value& val) {
 
   JSONFuncs::check_doc_member_string(val["nutrient"], "unitName");
   string unit_name = val["nutrient"]["unitName"].GetString();
-  uniTypes::Mass serving_unit = uniTypes::string_to_mass_unit.at(unit_name);
 
-  uniTypes::Mass serving_size = serving_amount * serving_unit;
+  uniTypes::RatioBase* new_serving;
+  
+  // Get the unit that we're going to work with.
+  if (unit_name.compare("IU") == 0) { // This is a dimensionless unit.
+    new_serving = new uniTypes::UOBA(serving_amount * uniTypes::IU);
+  }
+  else { // We're working with mass units
+    uniTypes::Mass serving_unit = uniTypes::string_to_mass_unit.at(unit_name);
+    new_serving = new uniTypes::Mass(serving_amount * serving_unit);
+  }
 
-  set_serving(serving_size);
+  set_serving(new_serving);
 }
 
 //! Destructor
-Nutrient::~Nutrient() {}
+Nutrient::~Nutrient() {
+  delete serving;
+}
 
 //! Returns the name of the nutrient
 string Nutrient::get_name() { return name; }
 
 //! Returns the serving size of this Nutrient
-uniTypes::Mass Nutrient::get_serving() { return serving; }
+uniTypes::RatioBase* Nutrient::get_serving() { return serving; }
 
 //! Sets the serving for this Nutrient
-void Nutrient::set_serving(uniTypes::Mass& mes) { serving = mes; }
+void Nutrient::set_serving(uniTypes::RatioBase* mes) { serving = mes; }
