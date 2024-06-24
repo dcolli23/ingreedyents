@@ -1,5 +1,5 @@
-# **ingreedyents**
- Optimizes the use of ingredients by ingredient UPC lookup combined with web scraping recipes.
+# **Ingreedyents**
+ Optimizes the use of ingredients by ingredient UPC lookup combined with (hopefully in the future) web scraping recipes.
 
 # Table of Contents
 
